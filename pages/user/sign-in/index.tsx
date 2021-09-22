@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -94,6 +95,7 @@ const reducer = (state: State, action: Action): State => {
 }
 
 const Login = () => {
+  const router = useRouter();
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -112,7 +114,14 @@ const Login = () => {
   }, [state.username, state.password]);
 
   const handleLogin = () => {
-
+    if (state.username === 'abc@email.com' && state.password === 'password') {
+        router.push('/');
+      } else {
+        dispatch({
+          type: 'loginFailed',
+          payload: 'Incorrect username or password'
+        });
+      }
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {

@@ -8,6 +8,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 
+import { useRouter } from 'next/dist/client/router';
+import { usersRepo } from '../../api/register';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -93,7 +95,8 @@ const reducer = (state: State, action: Action): State => {
   }
 }
 
-const Login = () => {
+const Login: React.FC = () => {
+  const router = useRouter();
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -112,7 +115,7 @@ const Login = () => {
   }, [state.username, state.password]);
 
   const handleLogin = () => {
-
+    usersRepo.register({ name: state.username, password: state.password });
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
@@ -139,7 +142,7 @@ const Login = () => {
   return (
     <form className={classes.container} noValidate autoComplete="off">
       <Card className={classes.card}>
-        <CardHeader className={classes.header} title="Login App" />
+        <CardHeader className={classes.header} title="Register" />
         <CardContent>
           <div>
             <TextField
@@ -175,7 +178,7 @@ const Login = () => {
             className={classes.loginBtn}
             onClick={handleLogin}
             disabled={state.isButtonDisabled}>
-            Login
+            Register
           </Button>
         </CardActions>
       </Card>
