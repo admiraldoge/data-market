@@ -1,0 +1,66 @@
+.ctn {
+  position: relative;
+  background-color: $black;
+  color: white;
+  height: 380px;
+  //height: 50vh;
+  padding-top: 45px;
+  z-index: 2;
+  @include respond-to('small'){
+    height: 623px;
+  }
+}
+.leftSideCtn {
+  margin-left: 130px;
+  @include respond-to('small'){
+    margin-left: 18px;
+  }
+}
+.smallIcon {
+  margin-bottom: 22px;
+}
+.link {
+  margin-bottom: 18px;
+  font-family: Panton;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 18px;
+  cursor: pointer;
+}
+.copyright {
+  font-family: Panton;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 23px;
+  text-align: center;
+  margin-top: 25px;
+  color: $md-grey;
+}
+.rightSideCtn {
+  margin-left: 130px;
+  @include respond-to('small'){
+    margin-left: 18px;
+  }
+}
+.socialNetworkLogo {
+  margin-right: 35px;
+  cursor: pointer;
+}
+.rightSideTitle {
+  margin-bottom: 16px;
+  font-family: Panton;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 18px;
+}
+.rightSideData {
+  font-family: Panton-Light;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  margin-bottom: 26px;
+}
