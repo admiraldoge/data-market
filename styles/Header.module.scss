@@ -1,0 +1,81 @@
+.ctn {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+}
+.headerCtn {
+  height: 107px;
+  border-bottom: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(162, 167, 168, 0.2);
+  width: 90%;
+}
+.activeItem {
+  color: $red;
+  font-family: Panton;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.activeItemLight {
+  color: $red50;
+  font-family: Panton;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.normalItem {
+  color: $black;
+  font-family: Panton;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.normalItem:hover {
+  //transform: scale(1.1);
+  color: #e21e26;
+  transition: all 400ms;
+}
+.normalItemLight {
+  color: white;
+  font-family: Panton;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.normalItemLight:hover {
+  transform: scale(1.1);
+  transition: all 400ms;
+}
+.img {
+  height: 81px;
+  width: 68px;
+  cursor: pointer;
+}
+
+.img:hover {
+  transform: scale(1.1);
+  transition: all 400ms;
+}
