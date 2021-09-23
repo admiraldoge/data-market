@@ -351,3 +351,10 @@ export type rseSliderBubbleType = {
 	bubbleImage: imageType,
 	iconImage: imageType
 }
+//FORM INPUTS
+export type stringInput = {
+	label: stringType,
+	placeholder: stringType,
+	isRequired: booleanType,
+	logic: any
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "/styles/Footer.module.scss";
-import {stringType} from "../../statics/types";
+import {stringType} from "../../types/types";
 import Grid from "@material-ui/core/Grid";
 import {useRouter} from "next/router";
 import useMediaQuery from "@material-ui/core/useMediaQuery";

@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "next/head";
-import {imageType, numberType, stringType} from "../../statics/types";
+import {imageType, numberType, stringType} from "../../types/types";
 type HeaderProps = {
 	title: stringType,
 	description: stringType,

@@ -3,7 +3,7 @@ module.exports = {
     reactStrictMode: true,
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],
-        prependData: @import "variables.scss";@import "mixins.scss";
+        prependData: `@import "variables.scss";@import "mixins.scss";`
     },
     env: {
         FRONT_END_URL: process.env.FRONT_END_URL,
