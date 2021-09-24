@@ -5,11 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
 type stringProps = {
     formik: any,
-    entity: StringType,
-    name: string
+    entity: StringType
 };
 
-const String: React.FC<stringProps> = ({ formik, entity, name }) => {
+const String: React.FC<stringProps> = ({ formik, entity }) => {
     // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
     // which we can spread on <input> and alse replace ErrorMessage entirely.
     const props = {
@@ -18,30 +17,20 @@ const String: React.FC<stringProps> = ({ formik, entity, name }) => {
         type: "text",
         placeholder: "Doe"
     }
-    const {label} = props;
-    const [field, meta, helpers] = useField(props);
 
     return (
-        <Grid container direction={"row"} justifyContent={"center"} alignItems={"center"}>
+        <Grid key={entity.id} container direction={"row"} justifyContent={"center"} alignItems={"center"}>
             <Grid item>
                 <TextField
                     fullWidth
-                    id={name}
-                    name={name}
+                    id={entity.id}
+                    name={entity.id}
                     label={entity.label.value}
-                    value={formik.values[name]}
+                    value={formik.values[entity.id]}
                     onChange={formik.handleChange}
-                    error={formik.touched[name] && Boolean(formik.errors[name])}
-                    helperText={formik.touched[name] && formik.errors[name]}
+                    error={formik.touched[entity.id] && Boolean(formik.errors[entity.id])}
+                    helperText={formik.touched[entity.id] && formik.errors[entity.id]}
                 />
-                <label>
-                    {label}
-                    <input {...field} {...props}
-                    />
-                </label>
-                {meta.touched && meta.error ? (
-                    <div className="error">{meta.error}</div>
-                ) : null}
             </Grid>
         </Grid>
     );

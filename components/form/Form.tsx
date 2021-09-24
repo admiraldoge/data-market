@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useRouter} from "next/dist/client/router";
 import Grid from "@material-ui/core/Grid";
 import * as Yup from "yup";
@@ -11,43 +11,50 @@ import String from "./creation/String";
 import {stringType} from "../../types/types";
 
 type formProps = {
-    validation: any,
-    validationSchema: any,
-    submit: {
-        message: stringType,
-        callback?: () => {}
-    },
-    fields?: any
+    fields: any
 }
 
-const Form: React.FC<formProps> = ({validation, fields, submit}) => {
+const Form: React.FC<formProps> = ({fields=[]}) => {
     const router = useRouter()
     const { id } = router.query
 
-    const validationSchema = Yup.object(validation);
+    const [initialValues, setInitialValues] = useState({} as any);
 
-    const initialValues = fields.map((field:any, idx:number) => {
+    const submit = {
+        message: "Enviar"
+    }
 
-        switch (field._template) {
-            case "string":
-                return <String formik={formik} {...field} idx={idx} name={`field_${field._template}_${idx}`}/>
-                break;
-        }
+    const validationSchema = Yup.object().shape({
+
     });
+
+    //const validationSchema = Yup.object(validation);
+
+   useEffect(() => {
+       let aux = {} as any;
+       for(let i in fields) {
+           // @ts-ignore
+           aux[fields[i].id] = "";
+       }
+       console.log('initial values: ',aux);
+       setInitialValues(aux);
+   },[fields])
+
 
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
+            console.log('Form save',values);
+            //alert(JSON.stringify(values, null, 2));
         },
     });
 
     const Fields = fields.map((field:any, idx:number) => {
-
+        //console.log('Field: ',field);
         switch (field._template) {
             case "string":
-                return <String formik={formik} {...field} idx={idx} name={`field_${field._template}_${idx}`}/>
+                return <String formik={formik} entity={field} idx={idx}/>
                 break;
         }
     });
@@ -57,7 +64,9 @@ const Form: React.FC<formProps> = ({validation, fields, submit}) => {
                 <Grid item xs={8}>
                     <form onSubmit={formik.handleSubmit}>
                         {Fields}
-                        <button type="submit">{submit.message.value}</button>
+                        <Grid container direction={"row"} justifyContent={"center"} style={{marginTop: "20px"}}>
+                            <button type="submit">{submit.message}</button>
+                        </Grid>
                     </form>
                 </Grid>
             </Grid>
