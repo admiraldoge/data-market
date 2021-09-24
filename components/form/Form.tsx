@@ -36,9 +36,9 @@ const Form: React.FC<formProps> = ({fields=[]}) => {
            // @ts-ignore
            aux[fields[i].id] = "";
        }
-       console.log('initial values: ',aux);
+       //console.log('initial values: ',aux);
        setInitialValues(aux);
-   },[fields])
+   },[])
 
 
     const formik = useFormik({
