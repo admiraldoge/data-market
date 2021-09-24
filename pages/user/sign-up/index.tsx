@@ -34,6 +34,21 @@ export default function SignUp() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    if(isEmailValid(data.get('email')) && passValidation(data.get('password'))){
+      register({name: data.get('firstName') + ' ' + data.get('lastName'), email: data.get('email'), password: data.get('password')});
+    }else{
+      alert(passValidation(data.get('password')?.toString()));
+    }
+  };
+
+  const isEmailValid = (value: any) => {
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return emailRegex.test(value);
+  };
+
+  const passValidation = (value: any) => {
+    const re = new RegExp(`^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d^a-zA-Z0-9].{5,50}$`);
+    return re.test(value);
   };
 
   return (
