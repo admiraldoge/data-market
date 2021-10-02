@@ -28,3 +28,20 @@ export const login = async (credentials) => {
   const response = await request.json();
   return response.data;
 };
+
+export const getAll = async () => {
+  const request  = await fetch('http://localhost:8080/users');
+  const response = await request.json();
+  return response;
+}
+
+export const del = async (id) => {
+  const request
+      = await fetch(
+          'http://localhost:8080/users/'+id,
+      {
+          method: "DELETE",
+      });
+  const response = await request.json();
+  return response.data;
+};
