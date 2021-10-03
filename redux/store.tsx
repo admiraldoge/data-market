@@ -8,9 +8,7 @@ const editorReducer = createReducer(
 	  titles: ["Inicio"],
 	  path: [],
 	  pathType: [],
-	  pageData: {
-		  body: []
-	  }
+	  formData: {}
   },
   (builder) => {
     builder
@@ -21,7 +19,7 @@ const editorReducer = createReducer(
 	    })
 	    .addCase(updatePageData, (state, action) => {
 		    console.log('UPDATE PAGE DATA EDITOR:',action.payload);
-		    let copy = JSON.parse(JSON.stringify(state.pageData));
+		    let copy = JSON.parse(JSON.stringify(state.formData));
 		    // @ts-ignore
 		    let obj = copy
 		    // @ts-ignore
@@ -32,7 +30,7 @@ const editorReducer = createReducer(
 		    }
 		    // @ts-ignore
 		    obj[path[lastKeyIndex]] = {...obj[path[lastKeyIndex]], ...action.payload.obj}
-		    let res = {...state, pageData: copy};
+		    let res = {...state, formData: copy};
 		    return res;
 	    })
 	    .addCase(addElementsToPath, (state, action:any) => {
@@ -72,9 +70,7 @@ const editorReducer = createReducer(
 		        titles: ["Inicio"],
 		        path: [],
 		        pathType: [],
-		        pageData: {
-			        body: []
-		        }
+		        formData: {}
 	        };
 	    })
       .addDefaultCase((state, action) => {

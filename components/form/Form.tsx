@@ -7,7 +7,7 @@ import {useRouter} from "next/dist/client/router";
 import Grid from "@material-ui/core/Grid";
 import * as Yup from "yup";
 import {Formik, useField, useFormikContext, useFormik} from "formik";
-import String from "./creation/String";
+import String from "./edit/String";
 import {stringType} from "../../types/types";
 
 type formProps = {
@@ -54,7 +54,7 @@ const Form: React.FC<formProps> = ({fields=[]}) => {
         //console.log('Field: ',field);
         switch (field._template) {
             case "string":
-                return <String formik={formik} entity={field} idx={idx}/>
+                return <String key={`field-${idx}`} formik={formik} entity={field}/>
                 break;
         }
     });

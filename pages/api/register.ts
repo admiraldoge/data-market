@@ -4,7 +4,7 @@ type Data = {
   name: string
 }
 
-export default function handler(
+export layouts function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
