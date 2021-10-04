@@ -7,22 +7,21 @@ import {TextField} from "@material-ui/core";
 import {updateObject} from "../../../redux/actions";
 
 type editRichText = {
-  key: string,
+	keyName: string,
   path: any[]
 }
 
-const String: React.FunctionComponent<editRichText>= ({ path}) => {
+const String: React.FunctionComponent<editRichText>= ({ keyName, path}) => {
   const dispatch = useAppDispatch();
   const editor = useAppSelector((state: RootState) => state.editor.object);
   const string = getSimpleEditorValue(editor, path);
   //console.log(':::String: ',string);
 
   return (
-    <Grid container direction={"column"} key={string._id}>
+    <Grid container direction={"column"} key={`string-${keyName}`}>
       <Grid container direction={"row"}>
         <Grid container direction={"column"}>
 	        <TextField
-		        id={string._id}
 		        label={string._templateName}
 		        placeholder={string.placeholder}
 		        value={string.value}

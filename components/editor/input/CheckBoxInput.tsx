@@ -6,26 +6,27 @@ import Grid from "@material-ui/core/Grid";
 import {TextField} from "@material-ui/core";
 import {updateObject} from "../../../redux/actions";
 import String from "../basic/String";
+import Array from "../basic/Array";
 
 type editRichText = {
 	key: string,
 	path: any[]
 }
 
-const StringInput: React.FunctionComponent<editRichText>= ({ path}) => {
+const CheckBoxInput: React.FunctionComponent<editRichText>= ({ path}) => {
 	const editor = useAppSelector((state: RootState) => state.editor.object);
-	const stringInput = getSimpleEditorValue(editor, path);
-	console.log(':::StringInput: ',path,stringInput);
+	const checkBoxInput = getSimpleEditorValue(editor, path);
+	console.log(':::CheckBoxInput: ',checkBoxInput,'with path',path);
 
 	return (
-		<Grid container direction={"column"} key={stringInput._id}>
+		<Grid container direction={"column"} key={checkBoxInput._id}>
 			<Grid container direction={"row"}>
-				<String keyName={`input-text-${stringInput._id}`} path={[...path, "label"]}/>
+				<String keyName={`input-text-${checkBoxInput._id}`} path={[...path, "label"]}/>
 			</Grid>
 			<Grid container direction={"row"}>
-				<String keyName={`input-text-${stringInput._id}`} path={[...path, "placeholder"]}/>
+				<Array keyName={"options"} path={[...path, 'options']}/>
 			</Grid>
 		</Grid>
 	)
 }
-export default StringInput;
+export default CheckBoxInput;

@@ -5,48 +5,40 @@ import {getSimpleEditorValue} from "../../../utils/mapper";
 import Grid from "@material-ui/core/Grid";
 import {TextField} from "@material-ui/core";
 import {updateObject} from "../../../redux/actions";
+import {objectMapper} from "../../../utils/editorObjectMapper";
 
-type editRichText = {
-  key: string,
+type arrayProps = {
+	keyName: string,
   path: any[]
 }
 
-const Array: React.FunctionComponent<editRichText>= ({ path}) => {
+const Array: React.FunctionComponent<arrayProps>= ({ keyName, path}) => {
   const dispatch = useAppDispatch();
-  const editor = useAppSelector((state: RootState) => state.editor.object);
-  const array = getSimpleEditorValue(editor, path);
-  console.log(':::String: ',array);
+  const editor = useAppSelector((state: RootState) => state.editor);
+  const array = getSimpleEditorValue(editor.object, path);
+	const itemPath = [...path, "items"];
+  console.log(':::Array: ',array, 'with itempath',itemPath);
 
   const Items = array.items.map((item:any, idx:number) => {
-  	return
+  	return (
+		  <Grid container direction={"row"} key={`${keyName}-items-${idx}`}>
+			  <Grid item>
+				  {objectMapper(idx, item, editor, itemPath)}
+			  </Grid>
+		  </Grid>
+	  )
   })
 
   return (
-    <Grid container direction={"column"} key={array._id}>
-	    <Grid container direction={"row"}>
+    <Grid key={`array-${keyName}`} container direction={"column"}>
+	    <Grid container direction={"row"} key={"label"}>
 		    <Grid item>
 			    {array._templateName}
 		    </Grid>
 	    </Grid>
-      <Grid container direction={"row"}>
-        <Grid container direction={"column"}>
-	        <TextField
-		        id={array._id}
-		        label={array._templateName}
-		        placeholder={array.placeholder}
-		        value={array.value}
-		        onChange={(e) => {
-			        dispatch(updateObject(
-				        {
-					        obj: {
-						        value: e.currentTarget.value
-					        },
-					        path: path
-				        }))
-		        }}
-	        />
-        </Grid>
-      </Grid>
+	    <Grid container direction={"column"}>
+		    {Items}
+	    </Grid>
     </Grid>
   )
 }

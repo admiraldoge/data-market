@@ -19,6 +19,7 @@ import {getSimpleEditorValue} from "../../utils/mapper";
 import String from "./basic/String";
 import Grid from '@mui/material/Grid';
 import {objectMapper} from "../../utils/editorObjectMapper";
+import Button from "@mui/material/Button";
 
 type editorProps = {
 
@@ -38,6 +39,7 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 		let newComponents = [] as any;
 		console.log('Obj: ',obj);
 		for(const [key, value] of Object.entries(obj)) {
+			console.log('EDITOR OBJECT: ',key)
 			if(key[0] === "_") continue;
 			//Put name first
 			if(key === "name") {
@@ -50,9 +52,10 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 	},[editor.path, editor.object]);
 
 	return (
-		<Grid container>
-			<Grid item xs={12}>
-				{components}
+		<Grid container direction={"column"}>
+			{components}
+			<Grid item key={"save-button"}>
+				<Button variant="contained">Guardar</Button>
 			</Grid>
 		</Grid>
   )

@@ -15,6 +15,7 @@ export const COLOR = "color";
 
 //Inputs
 export const STRING_INPUT = "stringInput"
+export const CHECK_BOX_INPUT = "checkBoxInput"
 
 //Hidden objects that do not need to be modified
 export const FORM_1 = "form1";
