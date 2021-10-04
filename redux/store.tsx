@@ -1,5 +1,5 @@
 import { configureStore, createReducer } from '@reduxjs/toolkit'
-import {setEditor, cleanEditor, addElementsToPath, removeElementsInPath, updatePageData} from "./actions";
+import {setEditor, cleanEditor, addElementsToPath, removeElementsInPath, updateObject} from "./actions";
 import {string} from "prop-types";
 
 
@@ -8,7 +8,7 @@ const editorReducer = createReducer(
 	  titles: ["Inicio"],
 	  path: [],
 	  pathType: [],
-	  formData: {}
+	  object: {}
   },
   (builder) => {
     builder
@@ -17,20 +17,20 @@ const editorReducer = createReducer(
 	    	let res = {...state, ...action.payload};
 	    	return res;
 	    })
-	    .addCase(updatePageData, (state, action) => {
+	    .addCase(updateObject, (state, action) => {
 		    console.log('UPDATE PAGE DATA EDITOR:',action.payload);
-		    let copy = JSON.parse(JSON.stringify(state.formData));
+		    let copy = JSON.parse(JSON.stringify(state.object));
 		    // @ts-ignore
 		    let obj = copy
 		    // @ts-ignore
 		    const path = action.payload.path;
 		    let lastKeyIndex = path.length - 1;
 		    for (let i = 0; i < lastKeyIndex; i++) {
-				obj = obj[path[i]];
+			    obj = obj[path[i]];
 		    }
 		    // @ts-ignore
 		    obj[path[lastKeyIndex]] = {...obj[path[lastKeyIndex]], ...action.payload.obj}
-		    let res = {...state, formData: copy};
+		    let res = {...state, object: copy};
 		    return res;
 	    })
 	    .addCase(addElementsToPath, (state, action:any) => {
@@ -70,7 +70,7 @@ const editorReducer = createReducer(
 		        titles: ["Inicio"],
 		        path: [],
 		        pathType: [],
-		        formData: {}
+		        object: {}
 	        };
 	    })
       .addDefaultCase((state, action) => {
