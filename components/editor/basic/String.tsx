@@ -5,6 +5,7 @@ import {getSimpleEditorValue} from "../../../utils/mapper";
 import Grid from "@material-ui/core/Grid";
 import {TextField} from "@material-ui/core";
 import {updateObject} from "../../../redux/actions";
+import styles from "../../../styles/basic/String.module.scss";
 
 type editRichText = {
 	keyName: string,
@@ -18,7 +19,7 @@ const String: React.FunctionComponent<editRichText>= ({ keyName, path}) => {
   //console.log(':::String: ',string);
 
   return (
-    <Grid container direction={"column"} key={`string-${keyName}`}>
+    <Grid container direction={"column"} key={`string-${keyName}`} className={styles.ctn}>
       <Grid container direction={"row"}>
         <Grid container direction={"column"}>
 	        <TextField

@@ -7,6 +7,7 @@ import {TextField} from "@material-ui/core";
 import {updateObject} from "../../../redux/actions";
 import String from "../basic/String";
 import Array from "../basic/Array";
+import styles from "../../../styles/input/CheckBoxInput.module.scss";
 
 type editRichText = {
 	key: string,
@@ -19,7 +20,7 @@ const CheckBoxInput: React.FunctionComponent<editRichText>= ({ path}) => {
 	console.log(':::CheckBoxInput: ',checkBoxInput,'with path',path);
 
 	return (
-		<Grid container direction={"column"} key={checkBoxInput._id}>
+		<Grid container direction={"column"} key={checkBoxInput._id} className={styles.ctn}>
 			<Grid container direction={"row"}>
 				<String keyName={`input-text-${checkBoxInput._id}`} path={[...path, "label"]}/>
 			</Grid>

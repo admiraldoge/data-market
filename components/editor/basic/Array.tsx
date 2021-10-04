@@ -6,6 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import {TextField} from "@material-ui/core";
 import {updateObject} from "../../../redux/actions";
 import {objectMapper} from "../../../utils/editorObjectMapper";
+import styles from "../../../styles/basic/Array.module.scss";
+
 
 type arrayProps = {
 	keyName: string,
@@ -22,7 +24,7 @@ const Array: React.FunctionComponent<arrayProps>= ({ keyName, path}) => {
   const Items = array.items.map((item:any, idx:number) => {
   	return (
 		  <Grid container direction={"row"} key={`${keyName}-items-${idx}`}>
-			  <Grid item>
+			  <Grid item xs={12}>
 				  {objectMapper(idx, item, editor, itemPath)}
 			  </Grid>
 		  </Grid>
@@ -30,14 +32,22 @@ const Array: React.FunctionComponent<arrayProps>= ({ keyName, path}) => {
   })
 
   return (
-    <Grid key={`array-${keyName}`} container direction={"column"}>
-	    <Grid container direction={"row"} key={"label"}>
-		    <Grid item>
-			    {array._templateName}
+    <Grid key={`array-${keyName}`} container direction={"column"} className={styles.ctn}>
+	    <Grid container direction={"row"} justifyContent={"center"}>
+		    <Grid item xs={12}>
+			    <Grid container direction={"row"} className={styles.title}>
+				    <Grid item>
+					    {array._templateName}
+				    </Grid>
+			    </Grid>
+			    <Grid container direction={"row"}>
+				    <Grid item xs={12}>
+					    <Grid container direction={"column"}>
+						    {Items}
+					    </Grid>
+				    </Grid>
+			    </Grid>
 		    </Grid>
-	    </Grid>
-	    <Grid container direction={"column"}>
-		    {Items}
 	    </Grid>
     </Grid>
   )

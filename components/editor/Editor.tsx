@@ -20,6 +20,7 @@ import String from "./basic/String";
 import Grid from '@mui/material/Grid';
 import {objectMapper} from "../../utils/editorObjectMapper";
 import Button from "@mui/material/Button";
+import styles from "../../styles/components/Editor.module.scss";
 
 type editorProps = {
 
@@ -42,10 +43,10 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 			console.log('EDITOR OBJECT: ',key)
 			if(key[0] === "_") continue;
 			//Put name first
-			if(key === "name") {
-				newComponents = [objectMapper(key, value, editor), ...newComponents];
-			} else {
+			if(key === "fields") {
 				newComponents.push(objectMapper(key, value, editor));
+			} else {
+				newComponents.unshift(objectMapper(key, value, editor));
 			}
 		}
 		setComponents(newComponents);
@@ -54,7 +55,7 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 	return (
 		<Grid container direction={"column"}>
 			{components}
-			<Grid item key={"save-button"}>
+			<Grid container direction={"row"} key={"save-button"} className={styles.ctn}>
 				<Button variant="contained">Guardar</Button>
 			</Grid>
 		</Grid>

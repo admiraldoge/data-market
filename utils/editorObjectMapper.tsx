@@ -39,30 +39,3 @@ const ObjectItem = ( key:any, obj:any) => {
 		</Grid>
 	)
 }
-
-const ArrayItem = (obj:any, key:any, editor:any) => {
-	//console.log('ARRAY: ',obj, key);
-	const Items = obj.items.map((item:any, idx:number) => {
-		const itemPath = [...editor.path, key, "items"];
-		//console.log('Item path: ',itemPath);
-		return (
-			<Grid container direction={"row"} key={`items-${idx}`}>
-				<Grid item>
-					{objectMapper(idx, item, editor, itemPath)}
-				</Grid>
-			</Grid>
-		)
-	})
-	return (
-		<Grid container key={key}>
-			<Grid container direction={"row"}>
-				<Grid item>
-					{obj._templateName}
-				</Grid>
-			</Grid>
-			<Grid container direction={"column"}>
-				{Items}
-			</Grid>
-		</Grid>
-	)
-}

@@ -5,6 +5,7 @@ import {useAppDispatch} from "../../../redux/hooks";
 import {getFormData} from "../../../api/form";
 import Form from "../Form";
 import Editor from "../../editor/Editor";
+import styles from "../../../styles/form/EditForm.module.scss";
 
 
 type pageProps = {
@@ -20,18 +21,16 @@ const EditForm: React.FunctionComponent<pageProps> = ({query}) => {
 	},[]);
 
 	return (
-			<div>
-				<Grid container direction={"row"} justifyContent={"center"}>
-					<Grid item xs={8}>
-						<Grid container direction={"row"} justifyContent={"center"}>
-							Edit Form
-						</Grid>
-					</Grid>
-					<Grid item xs={8}>
-						<Editor/>
-					</Grid>
+		<Grid container direction={"row"} justifyContent={"center"} className={styles.ctn}>
+			<Grid item xs={10}>
+				<Grid container direction={"row"} justifyContent={"center"} className={styles.title}>
+					<h1>Editar formulario</h1>
 				</Grid>
-			</div>
+			</Grid>
+			<Grid item xs={10}>
+				<Editor/>
+			</Grid>
+		</Grid>
 	)
 }
 

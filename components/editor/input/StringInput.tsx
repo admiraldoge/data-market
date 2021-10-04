@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import {TextField} from "@material-ui/core";
 import {updateObject} from "../../../redux/actions";
 import String from "../basic/String";
+import styles from "../../../styles/input/StringInput.module.scss";
 
 type editRichText = {
 	key: string,
@@ -18,12 +19,18 @@ const StringInput: React.FunctionComponent<editRichText>= ({ path}) => {
 	console.log(':::StringInput: ',path,stringInput);
 
 	return (
-		<Grid container direction={"column"} key={stringInput._id}>
-			<Grid container direction={"row"}>
-				<String keyName={`input-text-${stringInput._id}`} path={[...path, "label"]}/>
-			</Grid>
-			<Grid container direction={"row"}>
-				<String keyName={`input-text-${stringInput._id}`} path={[...path, "placeholder"]}/>
+		<Grid container direction={"row"} className={styles.ctn}>
+			<Grid item xs={12}>
+				<Grid container direction={"column"} key={stringInput._id}>
+					<Grid container direction={"row"} className={styles.label}>
+						<Grid item xs={12}>
+							<String keyName={`input-text-${stringInput._id}`} path={[...path, "label"]}/>
+						</Grid>
+					</Grid>
+					<Grid container direction={"row"} className={styles.placeholder}>
+						<String keyName={`input-text-${stringInput._id}`} path={[...path, "placeholder"]}/>
+					</Grid>
+				</Grid>
 			</Grid>
 		</Grid>
 	)

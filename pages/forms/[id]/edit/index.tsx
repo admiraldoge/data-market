@@ -5,6 +5,8 @@ import {useAppDispatch} from "../../../../redux/hooks";
 import { Provider } from 'react-redux'
 import store from '../../../../redux/store';
 import EditForm from "../../../../components/form/edit/EditForm";
+import styles from "../../../../styles/pages/Edit.module.scss";
+import Grid from "@material-ui/core/Grid";
 
 
 type pageProps = {
@@ -14,7 +16,12 @@ type pageProps = {
 const Index: React.FunctionComponent<pageProps> = ({query}) => {
     return (
 	    <Provider store={store}>
-		    <EditForm query={query}/>
+		    <Grid container direction={"row"} justifyContent={"center"}
+		          alignContent={"center"} className={styles.ctn}>
+			    <Grid item xs={8}>
+				    <EditForm query={query}/>
+			    </Grid>
+		    </Grid>
 	    </Provider>
     )
 }
