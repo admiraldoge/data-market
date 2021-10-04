@@ -11,21 +11,30 @@ type editRichText = {
   path: any[]
 }
 
-const String: React.FunctionComponent<editRichText>= ({ path}) => {
+const Array: React.FunctionComponent<editRichText>= ({ path}) => {
   const dispatch = useAppDispatch();
   const editor = useAppSelector((state: RootState) => state.editor.object);
-  const string = getSimpleEditorValue(editor, path);
-  //console.log(':::String: ',string);
+  const array = getSimpleEditorValue(editor, path);
+  console.log(':::String: ',array);
+
+  const Items = array.items.map((item:any, idx:number) => {
+  	return
+  })
 
   return (
-    <Grid container direction={"column"} key={string._id}>
+    <Grid container direction={"column"} key={array._id}>
+	    <Grid container direction={"row"}>
+		    <Grid item>
+			    {array._templateName}
+		    </Grid>
+	    </Grid>
       <Grid container direction={"row"}>
         <Grid container direction={"column"}>
 	        <TextField
-		        id={string._id}
-		        label={string._templateName}
-		        placeholder={string.placeholder}
-		        value={string.value}
+		        id={array._id}
+		        label={array._templateName}
+		        placeholder={array.placeholder}
+		        value={array.value}
 		        onChange={(e) => {
 			        dispatch(updateObject(
 				        {
@@ -41,4 +50,4 @@ const String: React.FunctionComponent<editRichText>= ({ path}) => {
     </Grid>
   )
 }
-export default String;
+export default Array;

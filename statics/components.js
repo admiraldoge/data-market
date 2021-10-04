@@ -2,6 +2,7 @@ export const RICH_TEXT = "richText";
 export const IMAGE = "image";
 export const BUTTON = "button";
 export const STRING = "string";
+export const ARRAY = "array";
 export const TEXT = "text";
 export const ICON = "icon";
 export const COORDINATES = "coordinates";
@@ -11,6 +12,9 @@ export const VIDEO = "video";
 export const BOOLEAN = "boolean";
 export const FILE = "file";
 export const COLOR = "color";
+
+//Inputs
+export const STRING_INPUT = "stringInput"
 
 //Hidden objects that do not need to be modified
 export const FORM_1 = "form1";

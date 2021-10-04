@@ -21,10 +21,11 @@ import Grid from '@mui/material/Grid';
 import {objectMapper} from "../../utils/editorObjectMapper";
 
 type editorProps = {
-
+	path: [],
+	components: []
 }
 
-const Editor: React.FunctionComponent<editorProps> = ({}) => {
+const Editor: React.FunctionComponent<editorProps> = ({components:any, path}) => {
 	const dispatch = useAppDispatch();
 	const editor = useAppSelector((state: RootState) => state.editor);
 	const [components, setComponents] = useState([] as any);
@@ -37,14 +38,8 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 		const obj = getSimpleEditorValue(editor.object, editor.path);
 		let newComponents = [] as any;
 		console.log('Obj: ',obj);
-		for(const [key, value] of Object.entries(obj)) {
-			if(key[0] === "_") continue;
-			//Put name first
-			if(key === "name") {
-				newComponents = [objectMapper(key, value, editor), ...newComponents];
-			} else {
-				newComponents.push(objectMapper(key, value, editor));
-			}
+		for(let i in components) {
+			newComponents.push(objectMapper(`simpleEditor-${i}`, components[i], editor));
 		}
 		setComponents(newComponents);
 	},[editor.path, editor.object]);
