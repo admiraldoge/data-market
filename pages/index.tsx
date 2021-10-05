@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import Navbar from '../components/navbar';
 import { read } from '../api/forms';
 import { useEffect, useState } from 'react';
 
@@ -47,14 +47,9 @@ export default function Album() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Data Market
-          </Typography>
-          <Button color="inherit">Logout</Button>
-        </Toolbar>
-      </AppBar>
+      <div className="App">
+			<Navbar />
+		</div>
       <main>
         {/* Hero unit */}
         <Box
