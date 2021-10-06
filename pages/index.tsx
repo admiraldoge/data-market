@@ -14,9 +14,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Navbar from '../components/navbar';
+import Navbar from '../components/navbar/navbar';
 import { read } from '../api/forms';
 import { useEffect, useState } from 'react';
+import { StyledEngineProvider } from '@mui/material/styles';
 
 function Copyright() {
   return (
@@ -47,9 +48,9 @@ export default function Album() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className="App">
-			<Navbar />
-		</div>
+      <StyledEngineProvider injectFirst>
+    <Navbar />
+  </StyledEngineProvider>
       <main>
         {/* Hero unit */}
         <Box
