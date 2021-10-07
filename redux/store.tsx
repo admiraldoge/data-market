@@ -6,7 +6,7 @@ import {
 	removeElementsInPath,
 	updateObject,
 	addToArray,
-	addField
+	addField, removeFromArray
 } from "./actions";
 import {string} from "prop-types";
 
@@ -86,6 +86,25 @@ const editorReducer = createReducer(
 		    }
 		    // @ts-ignore
 		    obj[path[lastKeyIndex]] = [...obj[path[lastKeyIndex]], action.payload.newItem]
+		    return {
+			    ...state,
+			    object: copy
+		    };
+	    })
+	    .addCase(removeFromArray, (state, action:any) => {
+		    console.log('ADD NEW ELEMENT TO LIST',action.payload);
+		    let copy = JSON.parse(JSON.stringify(state.object));
+		    // @ts-ignore
+		    let obj = copy
+		    // @ts-ignore
+		    const path = action.payload.path;
+		    let lastKeyIndex = path.length - 1;
+		    for (let i = 0; i < lastKeyIndex; i++) {
+			    obj = obj[path[i]];
+		    }
+		    // @ts-ignore
+		    obj[path[lastKeyIndex]] = obj[path[lastKeyIndex]].filter((item,idx) => idx !== action.payload.idx);
+		    //obj[path[lastKeyIndex]] = [...obj[path[lastKeyIndex]], action.payload.newItem]
 		    return {
 			    ...state,
 			    object: copy

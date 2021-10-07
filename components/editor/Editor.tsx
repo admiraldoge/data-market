@@ -24,6 +24,7 @@ import styles from "../../styles/components/Editor.module.scss";
 import {inputTemplates} from "../../statics/inputTemplates";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import {addField, addToArray} from "../../redux/actions";
+import {updateFormData} from "../../api/form";
 
 type editorProps = {
 
@@ -83,17 +84,24 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 		<Grid container direction={"row"} justifyContent={"space-between"}>
 			<Grid item xs={3}>
 				<Grid container direction={"column"}>
+					<Grid item>
+						<h4>Campos</h4>
+					</Grid>
 					{InputTemplates}
 				</Grid>
 			</Grid>
 			<Grid item xs={8}>
 				<Grid container direction={"column"}>
 					{components}
-					<Grid container direction={"row"} justifyContent={"center"} alignContent={"center"} className={styles.addField}>
+					{false && <Grid container direction={"row"} justifyContent={"center"} alignContent={"center"}
+					       className={styles.addField}>
 						<Button variant="outlined" color={"success"}>Agregar Campo</Button>
-					</Grid>
+					</Grid>}
 					<Grid container direction={"row"} key={"save-button"} justifyContent={"center"} className={styles.ctn}>
-						<Button variant="contained" color={"success"}>Guardar</Button>
+						<Button
+							variant="contained" color={"success"}
+							onClick={(e) => {dispatch(updateFormData(editor.object))}}
+						>Guardar</Button>
 					</Grid>
 				</Grid>
 			</Grid>
