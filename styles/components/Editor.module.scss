@@ -1,6 +1,22 @@
 .ctn {
 
 }
+.inputDrawerButtonCtn {
+  cursor: pointer;
+  background-color: #d9d7d7;
+  height: 50px;
+}
+.inputDrawerButtonCtn:hover {
+  background-color: #aba8a8;
+}
+.inputDrawerButtonCtn:active {
+  background-color: #969393;
+}
+.addField {
+  background-color: #d9d7d7;
+  height: 100px;
+  margin-bottom: 20px;
+}
 .saveBtn {
   margin-bottom: 20px;
 }

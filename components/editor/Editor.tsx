@@ -21,6 +21,9 @@ import Grid from '@mui/material/Grid';
 import {objectMapper} from "../../utils/editorObjectMapper";
 import Button from "@mui/material/Button";
 import styles from "../../styles/components/Editor.module.scss";
+import {inputTemplates} from "../../statics/inputTemplates";
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import {addField, addToArray} from "../../redux/actions";
 
 type editorProps = {
 
@@ -52,11 +55,47 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 		setComponents(newComponents);
 	},[editor.path, editor.object]);
 
+	const addElementToFields = (template:any) => {
+		dispatch(addField({newItem: template}))
+	}
+
+	const InputTemplates = inputTemplates.map((template:any, idx:number) => {
+		return (
+			<Grid container
+			      direction={"row"}
+			      key={`template_${idx}`}
+			      className={styles.inputDrawerButtonCtn}
+			      justifyContent={"space-evenly"}
+			      alignContent={"center"}
+			      onClick={() => addElementToFields(template)}
+			>
+				<Grid item>
+					{template._templateName}
+				</Grid>
+				<Grid item>
+					<AddBoxIcon/>
+				</Grid>
+			</Grid>
+		)
+	})
+
 	return (
-		<Grid container direction={"column"}>
-			{components}
-			<Grid container direction={"row"} key={"save-button"} className={styles.ctn}>
-				<Button variant="contained">Guardar</Button>
+		<Grid container direction={"row"} justifyContent={"space-between"}>
+			<Grid item xs={3}>
+				<Grid container direction={"column"}>
+					{InputTemplates}
+				</Grid>
+			</Grid>
+			<Grid item xs={8}>
+				<Grid container direction={"column"}>
+					{components}
+					<Grid container direction={"row"} justifyContent={"center"} alignContent={"center"} className={styles.addField}>
+						<Button variant="outlined" color={"success"}>Agregar Campo</Button>
+					</Grid>
+					<Grid container direction={"row"} key={"save-button"} justifyContent={"center"} className={styles.ctn}>
+						<Button variant="contained" color={"success"}>Guardar</Button>
+					</Grid>
+				</Grid>
 			</Grid>
 		</Grid>
   )
