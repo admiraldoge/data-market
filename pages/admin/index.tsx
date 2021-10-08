@@ -14,13 +14,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Navbar from '../components/navbar/navbar';
-import { read } from '../api/forms';
+import Navbar from '../../components/navbar/navbar';
+import { read } from '../../api/forms';
 import { useEffect, useState } from 'react';
 import { StyledEngineProvider } from '@mui/material/styles';
 import {useRouter} from "next/dist/client/router";
-import CreateFormModal from "../components/general/CreateFormModal";
-import CreateCollectorModal from "../components/general/CreateCollectorModal";
+import CreateFormModal from "../../components/general/CreateFormModal";
+import CreateCollectorModal from "../../components/general/CreateCollectorModal";
 import {use} from "ast-types";
 
 function Copyright() {
@@ -57,7 +57,10 @@ export default function Album() {
       alert(error);
     });
   }, []);
+
   return (
+    <>
+    <Navbar />
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main>
@@ -88,16 +91,54 @@ export default function Album() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained" onClick={() => router.push('/user/sign-in')}>Log in User</Button>
-              <Button variant="outlined" onClick={() => router.push('/user/sign-in')}>Log In Admin</Button>
+              <Button variant="contained" onClick={() => handleOpenCreateModal()}>Crear nuevo formulario</Button>
+              <Button variant="outlined">Buscar formulario</Button>
             </Stack>
           </Container>
         </Box>
+        <Container sx={{ py: 12 }} maxWidth="md">
+          {/* End hero unit */}
+          <Grid container spacing={4}>
+            {forms.map((form:any) => (
+              <Grid item key={form} xs={12} sm={6} md={4}>
+                <Card
+                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+                >
+                  <CardMedia
+                    component="img"
+                    sx={{
+                      // 16:9
+                      pt: '56.25%',
+                    }}
+                    image={form.thumbnail.src}
+                    alt="random"
+                  />
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {form.name.value}
+                    </Typography>
+                    <Typography>
+
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" onClick={() => {router.push(`/c/${form._id}`)}}>Llenar</Button>
+                    <Button size="small" onClick={() => {router.push(`forms/${form._id}/edit`)}}>Modificar</Button>
+                    <Button size="small" onClick={() => {
+                    	setCollectorModalData(form);
+                    	openCollectorModal();
+                    }}>Compartir</Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
-          UCB II-2021
+          Footer
         </Typography>
         <Typography
           variant="subtitle1"
@@ -105,7 +146,7 @@ export default function Album() {
           color="text.secondary"
           component="p"
         >
-          Taller de sistemas
+          Something here to give the footer a purpose!
         </Typography>
         <Copyright />
       </Box>
@@ -113,6 +154,6 @@ export default function Album() {
       <CreateFormModal open={createModalOpen} handleOpen={handleOpenCreateModal} handleClose={handleCloseCreateModal}/>
       <CreateCollectorModal data={collectorModalData} open={collectorModalOpen} handleOpen={openCollectorModal} handleClose={closeCollectorModal}/>
     </ThemeProvider>
+    </>
   );
 }
-

@@ -13,6 +13,21 @@ export const register = async (user) => {
     return response.data;
 };
 
+export const update = async (id, user) => {
+  const request
+      = await fetch(
+          'http://localhost:8080/users/'+id,
+      {
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          method: "PATCH",
+          body: JSON.stringify(user)
+      });
+  const response = await request.json();
+  return response;
+};
+
 export const login = async (credentials) => {
   const request
     = await fetch(
@@ -36,6 +51,7 @@ export const getAll = async () => {
 }
 
 export const del = async (id) => {
+  alert('http://localhost:8080/users/'+id)
   const request
       = await fetch(
           'http://localhost:8080/users/'+id,
@@ -43,5 +59,5 @@ export const del = async (id) => {
           method: "DELETE",
       });
   const response = await request.json();
-  return response.data;
+  return response;
 };

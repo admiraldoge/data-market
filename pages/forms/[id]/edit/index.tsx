@@ -7,7 +7,7 @@ import store from '../../../../redux/store';
 import EditForm from "../../../../components/form/edit/EditForm";
 import styles from "../../../../styles/pages/Edit.module.scss";
 import Grid from "@material-ui/core/Grid";
-
+import Navbar from '../../../../components/navbar/navbar';
 
 type pageProps = {
 	query: { id: string }
@@ -15,6 +15,8 @@ type pageProps = {
 
 const Index: React.FunctionComponent<pageProps> = ({query}) => {
     return (
+		<>
+	    <Navbar />
 	    <Provider store={store}>
 		    <Grid container direction={"row"} justifyContent={"center"}
 		          alignContent={"center"} className={styles.ctn}>
@@ -23,6 +25,7 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
 			    </Grid>
 		    </Grid>
 	    </Provider>
+		</>
     )
 }
 

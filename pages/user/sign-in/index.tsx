@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {login} from "../../../api/users";
+import { useRouter } from 'next/router';
 
 function Copyright(props: any) {
   return (
@@ -30,6 +31,7 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const router = useRouter();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -42,6 +44,7 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    router.push('/admin');
   };
 
   return (
