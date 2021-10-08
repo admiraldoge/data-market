@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {login} from "../../../api/users";
 
 function Copyright(props: any) {
   return (
@@ -33,6 +34,10 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
+	  login({
+		  email: data.get('email'),
+		  password: data.get('password'),
+	  });
     console.log({
       email: data.get('email'),
       password: data.get('password'),

@@ -6,6 +6,7 @@ export const register = async (form) => {
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             method: "POST",
             body: JSON.stringify(form)
         });
