@@ -18,6 +18,8 @@ import Navbar from '../components/navbar/navbar';
 import { read } from '../api/forms';
 import { useEffect, useState } from 'react';
 import { StyledEngineProvider } from '@mui/material/styles';
+import {useRouter} from "next/dist/client/router";
+import CreateFormModal from "../components/general/CreateFormModal";
 
 function Copyright() {
   return (
@@ -37,6 +39,12 @@ const theme = createTheme();
 
 export default function Album() {
   const [forms, setForms] = useState([]);
+	const router = useRouter();
+
+	const [createModalOpen, setCreateModalOpen] = React.useState(false);
+	const handleOpenCreateModal = () => setCreateModalOpen(true);
+	const handleCloseCreateModal = () => setCreateModalOpen(false);
+
   useEffect(() => {
     read().then( (res) => {
       setForms(res);
@@ -76,7 +84,7 @@ export default function Album() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained">Crear nuevo formulario</Button>
+              <Button variant="contained" onClick={() => handleOpenCreateModal()}>Crear nuevo formulario</Button>
               <Button variant="outlined">Buscar formulario</Button>
             </Stack>
           </Container>
@@ -103,12 +111,12 @@ export default function Album() {
                       {form.name.value}
                     </Typography>
                     <Typography>
-                      
+
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">Llenar</Button>
-                    <Button size="small">Modificar</Button>
+                    <Button size="small" onClick={() => {router.push(`/c/${form._id}`)}}>Llenar</Button>
+                    <Button size="small" onClick={() => {router.push(`forms/${form._id}/edit`)}}>Modificar</Button>
                   </CardActions>
                 </Card>
               </Grid>
@@ -132,6 +140,7 @@ export default function Album() {
         <Copyright />
       </Box>
       {/* End footer */}
+      <CreateFormModal open={createModalOpen} handleOpen={handleOpenCreateModal} handleClose={handleCloseCreateModal}/>
     </ThemeProvider>
   );
 }
