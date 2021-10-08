@@ -29,6 +29,7 @@ import {useFormik} from "formik";
 import * as Yup from "yup";
 import SubmitString from "./submitInput/SubmitString";
 import { submitForm } from "../../api/submission";
+import SubmitCheckBoxInput from "./submitInput/SubmitCheckBoxInput";
 
 type editorProps = {
 
@@ -68,6 +69,21 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 			}
 		}
 		setComponents(newComponents);
+		let newInitialValues = {} as any;
+		for(let i = 0; i < editor.object.fields.items.length; i++) {
+			switch (editor.object.fields.items[i]._template) {
+				case "stringInput":
+					newInitialValues[editor.object.fields.items[i].id] = "";
+					break;
+				case "checkBoxInput":
+					let options = [];
+					for(let j in editor.object.fields.items[i].options.items) options.push(false);
+					newInitialValues[editor.object.fields.items[i].id] = options;
+					break;
+			}
+		}
+		setInitialValues(newInitialValues);
+		console.log('::NEW INITIAL VALUES: ',newInitialValues);
 	},[editor.path, editor.object]);
 
 	const addElementToFields = (template:any) => {
@@ -97,6 +113,7 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 	const formik = useFormik({
 		initialValues: initialValues,
 		validationSchema: validationSchema,
+		enableReinitialize: true,
 		onSubmit: (values) => {
 			console.log('Form save',values);
 			dispatch(submitForm(editor.object._id, values));
@@ -109,6 +126,9 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 		switch (field._template) {
 			case "stringInput":
 				return <SubmitString key={`field-${idx}`} formik={formik} entity={field}/>
+				break;
+			case "checkBoxInput":
+				return <SubmitCheckBoxInput key={`field-${idx}`} formik={formik} entity={field}/>
 				break;
 		}
 	});
