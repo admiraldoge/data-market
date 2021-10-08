@@ -5,9 +5,12 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {TextField} from "@material-ui/core";
 import {useState} from "react";
-import {createForm} from "../../api/form";
-import {newFormTemplate} from "../../statics/formTemplate";
+import {createCollector} from "../../api/collector";
+import {newCollectorTemplate} from "../../statics/collectorTemplate";
 import {useRouter} from "next/dist/client/router";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Grid from "@material-ui/core/Grid";
 
 const style = {
 	position: 'absolute',
@@ -16,22 +19,26 @@ const style = {
 	transform: 'translate(-50%, -50%)',
 	width: 400,
 	bgcolor: 'background.paper',
-	border: '2px solid #000',
+	border: '1px solid #000',
+	borderRadius: '5px',
 	boxShadow: 24,
 	p: 4,
 	backgroundColor: "white"
 };
 
 type createFormModal = {
+	data: any,
 	open:boolean,
 	handleOpen:any,
 	handleClose:any
 }
 
-const CreateFormModal: React.FC<createFormModal> = ({open, handleOpen, handleClose}) => {
+const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen, handleClose}) => {
 
 	const router = useRouter();
-	const [formName, setFormName] = useState();
+	const [collectorName, setCollectorName] = useState("");
+	const [isPublic, setIsPublic] = useState(true);
+	const [created, setCreated] = useState(false);
 
 	return (
 		<Modal
@@ -43,30 +50,57 @@ const CreateFormModal: React.FC<createFormModal> = ({open, handleOpen, handleClo
 			<Box
 				sx={style}
 			>
-				<Typography id="modal-modal-title" variant="h6" component="h2" style={{marginBottom: "20px"}}>
-					Crear formulario
+				<Typography id="modal-modal-title" variant="h5" component="h2" style={{marginBottom: "20px"}}>
+					Crear URL
 				</Typography>
-				<TextField
-					id="outlined-basic"
-					label="Nombre"
-					placeholder="Formulario abc..."
-					variant="outlined"
-					fullWidth
-					style={{marginBottom: "20px"}}
-					value={formName}
-					onChange={(e) => setFormName(e.currentTarget.value)}
-				/>
-				<Button variant="contained" color="success" onClick={ async () => {
-					const formCreated = (await createForm(newFormTemplate(formName))) as any;
-					console.log('Form created: ',formCreated);
-					handleClose();
-					router.push(`forms/${formCreated._id}/edit`);
+				<Typography id="modal-modal-title" variant="h6" style={{marginBottom: "20px"}}>
+					{data.name && data.name.value}
+				</Typography>
+				<Grid container direction={"row"}>
+					<TextField
+						id="outlined-basic"
+						label="Nombre"
+						placeholder="Url abc..."
+						variant="outlined"
+						fullWidth
+						style={{marginBottom: "20px"}}
+						value={collectorName}
+						onChange={(e) => setCollectorName(e.currentTarget.value)}
+					/>
+				</Grid>
+				<Grid container direction={"row"} style={{marginBottom: "20px"}}>
+					<FormControlLabel
+						control={<Checkbox onChange={(e) => {console.log("value changed", e.currentTarget.value)}}/>}
+						label="Público"
+					/>
+				</Grid>
+				{!created && <Button variant="contained" color="success" onClick={async () => {
+					const formCreated = (await createCollector(newCollectorTemplate(data._id, collectorName, "", isPublic))) as any;
+					console.log('Collector created: ', formCreated);
+					setCreated(true);
 				}}
 				>
 					Crear
-				</Button>
+				</Button>}
+				{created && <TextField
+					id="outlined-basic"
+					label="Nombre"
+					placeholder="Url abc..."
+					variant="outlined"
+					fullWidth
+					style={{marginBottom: "20px"}}
+					value={`http://localhost:3000/c/${data._id}`}
+				/>}
+				{created && <Button variant="contained" color="error" onClick={async () => {
+					const formCreated = (await createCollector(newCollectorTemplate(data._id, collectorName, "", isPublic))) as any;
+					console.log('Collector created: ', formCreated);
+					handleClose();
+				}}
+        >
+          Cerrar
+        </Button>}
 			</Box>
 		</Modal>
 	);
 }
-export default CreateFormModal
+export default CreateCollectorModal

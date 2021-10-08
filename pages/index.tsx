@@ -20,6 +20,8 @@ import { useEffect, useState } from 'react';
 import { StyledEngineProvider } from '@mui/material/styles';
 import {useRouter} from "next/dist/client/router";
 import CreateFormModal from "../components/general/CreateFormModal";
+import CreateCollectorModal from "../components/general/CreateCollectorModal";
+import {use} from "ast-types";
 
 function Copyright() {
   return (
@@ -40,10 +42,13 @@ const theme = createTheme();
 export default function Album() {
   const [forms, setForms] = useState([]);
 	const router = useRouter();
-
+	const [collectorModalData, setCollectorModalData] = useState({} as any);
 	const [createModalOpen, setCreateModalOpen] = React.useState(false);
+	const [collectorModalOpen, setCollectorModalOpen] = React.useState(false);
 	const handleOpenCreateModal = () => setCreateModalOpen(true);
 	const handleCloseCreateModal = () => setCreateModalOpen(false);
+	const openCollectorModal = () => setCollectorModalOpen(true);
+	const closeCollectorModal = () => setCollectorModalOpen(false);
 
   useEffect(() => {
     read().then( (res) => {
@@ -117,6 +122,10 @@ export default function Album() {
                   <CardActions>
                     <Button size="small" onClick={() => {router.push(`/c/${form._id}`)}}>Llenar</Button>
                     <Button size="small" onClick={() => {router.push(`forms/${form._id}/edit`)}}>Modificar</Button>
+                    <Button size="small" onClick={() => {
+                    	setCollectorModalData(form);
+                    	openCollectorModal();
+                    }}>Compartir</Button>
                   </CardActions>
                 </Card>
               </Grid>
@@ -141,6 +150,7 @@ export default function Album() {
       </Box>
       {/* End footer */}
       <CreateFormModal open={createModalOpen} handleOpen={handleOpenCreateModal} handleClose={handleCloseCreateModal}/>
+      <CreateCollectorModal data={collectorModalData} open={collectorModalOpen} handleOpen={openCollectorModal} handleClose={closeCollectorModal}/>
     </ThemeProvider>
   );
 }
