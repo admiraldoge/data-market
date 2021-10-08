@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import {useAppDispatch} from "../../../redux/hooks";
 import {getFormData, getPublicFormData} from "../../../api/form";
 import Form from "../Form";
+import SubmitEditor from "../../editor/SubmitEditor";
 
 
 type pageProps = {
@@ -20,15 +21,10 @@ const FillForm: React.FunctionComponent<pageProps> = ({query}) => {
 	},[]);
 
 	return (
-			<div>
+			<div style={{height: "100%"}}>
 				<Grid container direction={"row"} justifyContent={"center"}>
-					<Grid item xs={8}>
-						<Grid container direction={"row"} justifyContent={"center"}>
-							Edit Form
-						</Grid>
-					</Grid>
-					<Grid item xs={8}>
-						<Form {...formData}/>
+					<Grid item xs={12} style={{height: "center"}}>
+						<SubmitEditor/>
 					</Grid>
 				</Grid>
 			</div>

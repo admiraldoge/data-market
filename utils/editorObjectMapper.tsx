@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import StringInput from "../components/editor/input/StringInput";
 import Array from "../components/editor/basic/Array";
 import CheckBoxInput from "../components/editor/input/CheckBoxInput";
+import SubmitString from "../components/editor/submitInput/SubmitString";
 
 export const objectMapper = (key:any, obj:any, editor:any, path?: any) => {
 	const realPath = path ? path : editor.path;

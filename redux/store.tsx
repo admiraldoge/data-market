@@ -16,7 +16,10 @@ const editorReducer = createReducer(
 	  titles: ["Inicio"],
 	  path: [],
 	  pathType: [],
-	  object: {}
+	  object: {
+	    name: {},
+		  fields: { items: []}
+	  }
   },
   (builder) => {
     builder
@@ -133,7 +136,7 @@ const editorReducer = createReducer(
 		        titles: ["Inicio"],
 		        path: [],
 		        pathType: [],
-		        object: {}
+		        object: {name: {},fields: { items: []}}
 	        };
 	    })
       .addDefaultCase((state, action) => {
