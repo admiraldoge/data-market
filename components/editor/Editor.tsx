@@ -25,6 +25,7 @@ import {inputTemplates} from "../../statics/inputTemplates";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import {addField, addToArray} from "../../redux/actions";
 import {updateFormData} from "../../api/form";
+import {useRouter} from "next/dist/client/router";
 
 type editorProps = {
 
@@ -32,6 +33,7 @@ type editorProps = {
 
 const Editor: React.FunctionComponent<editorProps> = ({}) => {
 	const dispatch = useAppDispatch();
+	const router = useRouter();
 	const editor = useAppSelector((state: RootState) => state.editor);
 	const [components, setComponents] = useState([] as any);
   const [dataIsArray, setDataIsArray] = useState(false);
@@ -100,7 +102,10 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 					<Grid container direction={"row"} key={"save-button"} justifyContent={"center"} className={styles.ctn}>
 						<Button
 							variant="contained" color={"success"}
-							onClick={(e) => {dispatch(updateFormData(editor.object))}}
+							onClick={(e) => {
+								dispatch(updateFormData(editor.object));
+								router.push(`/`);
+							}}
 						>Guardar</Button>
 					</Grid>
 				</Grid>

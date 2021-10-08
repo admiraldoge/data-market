@@ -25,7 +25,7 @@ export const objectMapper = (key:any, obj:any, editor:any, path?: any) => {
 			return (<CheckBoxInput key={key} path={[...realPath,key]}/>);
 			break;
 		default:
-			return (ObjectItem(key, obj));
+			return null;
 	}
 }
 
