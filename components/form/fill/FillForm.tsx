@@ -2,7 +2,7 @@ import type {GetServerSideProps, NextPage} from 'next'
 import React, {useEffect, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import {useAppDispatch} from "../../../redux/hooks";
-import {getFormData} from "../../../api/form";
+import {getFormData, getPublicFormData} from "../../../api/form";
 import Form from "../Form";
 
 
@@ -16,15 +16,7 @@ const FillForm: React.FunctionComponent<pageProps> = ({query}) => {
 	const [formData, setFormData] = useState({} as any);
 
 	useEffect(() => {
-		let aux = '614c56546bc8f58a9d55dc78';
-		dispatch(getFormData(id));
-		fetch(`${process.env.BACK_END_URL}/forms/${id}`, {method: "GET"})
-			.then(response => response.json())
-			.then(data => {
-				console.log('Final res',data);
-				setFormData(data);
-			});
-
+		dispatch(getPublicFormData(id));
 	},[]);
 
 	return (
