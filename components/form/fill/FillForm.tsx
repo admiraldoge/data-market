@@ -23,7 +23,7 @@ const FillForm: React.FunctionComponent<pageProps> = ({query}) => {
 	return (
 			<div style={{height: "100%"}}>
 				<Grid container direction={"row"} justifyContent={"center"}>
-					<Grid item xs={12} style={{height: "center"}}>
+					<Grid item xs={12} sm={10} md={6} lg={5} style={{height: "center"}}>
 						<SubmitEditor/>
 					</Grid>
 				</Grid>
