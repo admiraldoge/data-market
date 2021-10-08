@@ -32,7 +32,7 @@ export const login = async (credentials) => {
 export const getAll = async () => {
   const request  = await fetch('http://localhost:8080/users');
   const response = await request.json();
-  return response;
+  return response.items;
 }
 
 export const del = async (id) => {

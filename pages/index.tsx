@@ -48,9 +48,6 @@ export default function Album() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <StyledEngineProvider injectFirst>
-    <Navbar />
-  </StyledEngineProvider>
       <main>
         {/* Hero unit */}
         <Box
@@ -98,15 +95,15 @@ export default function Album() {
                       // 16:9
                       pt: '56.25%',
                     }}
-                    image="https://source.unsplash.com/random"
+                    image={form.thumbnail.src}
                     alt="random"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {form.name}
+                      {form.name.value}
                     </Typography>
                     <Typography>
-                      {form.tags}
+                      
                     </Typography>
                   </CardContent>
                   <CardActions>

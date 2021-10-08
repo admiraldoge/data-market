@@ -17,7 +17,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-
+import { ButtonBase } from '@material-ui/core';
+import Button from '@mui/material/Button';
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -91,9 +92,12 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <ButtonBase sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" noWrap component="div" >
             Data-Market
           </Typography>
+          </ButtonBase>
+          <Button color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -118,9 +122,6 @@ export default function PersistentDrawerLeft() {
         <List>
           {['Forms', 'Users'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
