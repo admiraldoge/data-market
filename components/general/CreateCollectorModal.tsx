@@ -37,7 +37,7 @@ const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen
 
 	const router = useRouter();
 	const [collectorName, setCollectorName] = useState("");
-	const [isPublic, setIsPublic] = useState(true);
+	const [isPublic, setIsPublic] = useState(false);
 	const [created, setCreated] = useState(false);
 
 	return (
@@ -70,7 +70,7 @@ const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen
 				</Grid>
 				<Grid container direction={"row"} style={{marginBottom: "20px"}}>
 					<FormControlLabel
-						control={<Checkbox onChange={(e) => {console.log("value changed", e.currentTarget.value)}}/>}
+						control={<Checkbox value={isPublic} onChange={(e) => {setIsPublic(e.currentTarget.checked)}}/>}
 						label="Público"
 					/>
 				</Grid>
