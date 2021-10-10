@@ -13,18 +13,18 @@ type stringProps = {
 
 const SubmitString: React.FC<stringProps> = ({ formik, entity }) => {
     return (
-        <Grid key={entity.id} container direction={"row"} justifyContent={"center"} alignItems={"center"}>
+        <Grid key={entity._id} container direction={"row"} justifyContent={"center"} alignItems={"center"}>
             <Grid item xs={12}>
                 <TextField
                     fullWidth
-                    id={entity.id}
-                    name={entity.id}
+                    id={entity._id}
+                    name={entity._id}
                     label={entity.label.value}
-                    value={formik.values[entity.id]}
+                    value={formik.values[entity._id]}
                     placeholder={entity.placeholder?.value}
                     onChange={formik.handleChange}
-                    error={formik.touched[entity.id] && Boolean(formik.errors[entity.id])}
-                    helperText={formik.touched[entity.id] && formik.errors[entity.id]}
+                    error={formik.touched[entity._id] && Boolean(formik.errors[entity._id])}
+                    helperText={formik.touched[entity._id] && formik.errors[entity._id]}
                 />
             </Grid>
         </Grid>

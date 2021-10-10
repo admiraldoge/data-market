@@ -73,12 +73,12 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 		for(let i = 0; i < editor.object.fields.items.length; i++) {
 			switch (editor.object.fields.items[i]._template) {
 				case "stringInput":
-					newInitialValues[editor.object.fields.items[i].id] = "";
+					newInitialValues[editor.object.fields.items[i]._id] = "";
 					break;
 				case "checkBoxInput":
 					let options = [];
 					for(let j in editor.object.fields.items[i].options.items) options.push(false);
-					newInitialValues[editor.object.fields.items[i].id] = options;
+					newInitialValues[editor.object.fields.items[i]._id] = options;
 					break;
 			}
 		}

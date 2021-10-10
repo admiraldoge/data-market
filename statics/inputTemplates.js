@@ -1,7 +1,7 @@
 export const stringInputTemplate = {
   "_template" : "stringInput",
   "_templateName": "Pregunta simple",
-  "id" : "",
+  "_id" : "",
   "label" : {
     "_template": "string",
     "_templateName": "Pregunta",
@@ -16,7 +16,7 @@ export const stringInputTemplate = {
 export const checkBoxInputTemplate = {
   "_template" : "checkBoxInput",
   "_templateName": "Opción múltiple",
-  "id" : "",
+  "_id" : "",
   "label" : {
     "_template": "string",
     "_templateName": "Pregunta",

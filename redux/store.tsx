@@ -9,6 +9,7 @@ import {
 	addField, removeFromArray
 } from "./actions";
 import {string} from "prop-types";
+import {getRandomString} from '../utils/functions';
 
 
 const editorReducer = createReducer(
@@ -69,8 +70,12 @@ const editorReducer = createReducer(
 		    for (let i = 0; i < lastKeyIndex; i++) {
 			    obj = obj[path[i]];
 		    }
+		    const newField = {
+		    	...action.payload.newItem,
+			    _id:  getRandomString(15)
+		    }
 		    // @ts-ignore
-		    obj[path[lastKeyIndex]] = [...obj[path[lastKeyIndex]], action.payload.newItem]
+		    obj[path[lastKeyIndex]] = [...obj[path[lastKeyIndex]], newField]
 		    return {
 			    ...state,
 			    object: copy
