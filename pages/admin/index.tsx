@@ -27,6 +27,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import {IconButton} from '@mui/material';
 import CopyAll from '@mui/icons-material/CopyAll';
+import Assessment from '@mui/icons-material/Assessment';
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -64,6 +65,9 @@ export default function Album() {
   }, []);
   const handleChange= (() => {});
   const clone = (() => {
+    alert("ga");
+  })
+  const report = (() => {
     alert("ga");
   })
   return (
@@ -114,11 +118,18 @@ export default function Album() {
                 > 
                     <CardHeader
                       action={
-                        <IconButton aria-label="settings" onClick={() => {
+                        <>
+                          <IconButton aria-label="settings" onClick={() => {
                           clone();
                         }}>
                           <CopyAll />
                         </IconButton>
+                        <IconButton aria-label="settings" onClick={() => {
+                          report();
+                        }}>
+                          <Assessment />
+                        </IconButton>
+                        </>
                       }
                       title={form.name.value}
                     />
