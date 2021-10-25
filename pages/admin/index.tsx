@@ -65,10 +65,10 @@ export default function Album() {
   }, []);
   const handleChange= (() => {});
   const clone = (() => {
-    alert("ga");
+    alert("formulario clonado");
   })
   const report = (() => {
-    alert("ga");
+    router.push('/forms/report');
   })
   return (
     <>
