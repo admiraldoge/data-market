@@ -171,7 +171,7 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" onClick={() => {router.push(`/c/${form.form._id}`)}}>Llenar</Button>
+                    <Button size="small" onClick={() => {router.push(`/c/${form._id}`)}}>Llenar</Button>
                   </CardActions>
                 </Card>
               </Grid>
