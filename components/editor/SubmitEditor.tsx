@@ -175,8 +175,11 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 				inputsInPage.push(objectMapper(value[i],idx));
 			}
 			res.push(<SubmitPage page={key} currentPage={page} changePage={setPage}>{inputsInPage}</SubmitPage>);
-			if(page === parseInt(key))
+			console.log("Comparing: ",page,parseInt(key));
+			if(page == parseInt(key)) {
+				console.log("Returning page",page);
 				return (<SubmitPage page={key} currentPage={page} changePage={setPage}>{inputsInPage}</SubmitPage>);
+			}
 			idx++;
 		}
 		return res;
@@ -191,7 +194,9 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 						<h1>{editor.object.name.value}</h1>
 					</Grid>
 					<form onSubmit={formik.handleSubmit}>
-						{Fields}
+						{
+							//Fields
+						}
 						{Pages()}
 						<Grid container direction={"row"} justifyContent={"space-evenly"} style={{marginTop: "20px"}}>
 							<Button
