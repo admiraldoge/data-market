@@ -2,6 +2,7 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -22,7 +23,11 @@ import {useRouter} from "next/dist/client/router";
 import CreateFormModal from "../../components/general/CreateFormModal";
 import CreateCollectorModal from "../../components/general/CreateCollectorModal";
 import {use} from "ast-types";
-
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import {IconButton} from '@mui/material';
+import CopyAll from '@mui/icons-material/CopyAll';
+import Assessment from '@mui/icons-material/Assessment';
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -41,6 +46,7 @@ const theme = createTheme();
 
 export default function Album() {
   const [forms, setForms] = useState([]);
+  const [value, setValue] = useState("");
 	const router = useRouter();
 	const [collectorModalData, setCollectorModalData] = useState({} as any);
 	const [createModalOpen, setCreateModalOpen] = React.useState(false);
@@ -57,7 +63,13 @@ export default function Album() {
       alert(error);
     });
   }, []);
-
+  const handleChange= (() => {});
+  const clone = (() => {
+    alert("ga");
+  })
+  const report = (() => {
+    alert("ga");
+  })
   return (
     <>
     <Navbar />
@@ -103,7 +115,24 @@ export default function Album() {
               <Grid item key={form} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                >
+                > 
+                    <CardHeader
+                      action={
+                        <>
+                          <IconButton aria-label="settings" onClick={() => {
+                          clone();
+                        }}>
+                          <CopyAll />
+                        </IconButton>
+                        <IconButton aria-label="settings" onClick={() => {
+                          report();
+                        }}>
+                          <Assessment />
+                        </IconButton>
+                        </>
+                      }
+                      title={form.name.value}
+                    />
                   <CardMedia
                     component="img"
                     sx={{
