@@ -30,6 +30,7 @@ import * as Yup from "yup";
 import SubmitString from "./submitInput/SubmitString";
 import { submitForm } from "../../api/submission";
 import SubmitCheckBoxInput from "./submitInput/SubmitCheckBoxInput";
+import SubmitPage from "./submitInput/SubmitPage";
 
 type editorProps = {
 
@@ -41,6 +42,7 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 	const [components, setComponents] = useState([] as any);
   const [dataIsArray, setDataIsArray] = useState(false);
   const [isArrayExpandable, setIsArrayExpandable] = useState(false);
+  const [page, setPage] = useState(1);
   const objFromStore = getSimpleEditorValue(editor.object, editor.path);
   const isArrayAux = Array.isArray(objFromStore);
 
@@ -48,6 +50,10 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 
 	const submit = {
 		message: "Enviar"
+	}
+
+	const save = {
+		message: "Guardar"
 	}
 
 	const validationSchema = Yup.object().shape({
@@ -116,10 +122,14 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 		enableReinitialize: true,
 		onSubmit: (values) => {
 			console.log('Form save',values);
-			dispatch(submitForm(editor.object._id, values));
+			dispatch(submitForm(editor.object._id, values, true));
 			//alert(JSON.stringify(values, null, 2));
 		},
 	});
+
+	const handleSave = (values:any) => {
+		dispatch(submitForm(editor.object._id, values, false));
+	}
 
 	const Fields = editor.object.fields.items.map((field:any, idx:number) => {
 		//console.log('Field: ',field);
@@ -133,6 +143,46 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 		}
 	});
 
+	const objectMapper = (field:any, idx:number) => {
+		switch (field._template) {
+			case "stringInput":
+				return <SubmitString key={`field-${idx}`} formik={formik} entity={field}/>
+				break;
+			case "checkBoxInput":
+				return <SubmitCheckBoxInput key={`field-${idx}`} formik={formik} entity={field}/>
+				break;
+		}
+	}
+
+
+	const Pages = () => {
+		let pages = {};
+		for(let i = 0; i < editor.object.fields.items.length; i++) {
+			if(pages[editor.object.fields.items[i].page.value]) {
+				pages[editor.object.fields.items[i].page.value] = [...pages[editor.object.fields.items[i].page.value], editor.object.fields.items[i]];
+			} else {
+				pages[editor.object.fields.items[i].page.value] = [editor.object.fields.items[i]];
+			}
+		}
+		console.log(':::Pages object: ',pages);
+		const res = [];
+		let idx = 0;
+		for(const [key,value] of Object.entries(pages)) {
+			const inputsInPage = [];
+			// @ts-ignore
+			for(let i = 0; i < value.length; i++) {
+				// @ts-ignore
+				inputsInPage.push(objectMapper(value[i],idx));
+			}
+			res.push(<SubmitPage page={key} currentPage={page} changePage={setPage}>{inputsInPage}</SubmitPage>);
+			if(page === parseInt(key))
+				return (<SubmitPage page={key} currentPage={page} changePage={setPage}>{inputsInPage}</SubmitPage>);
+			idx++;
+		}
+		return res;
+	}
+
+
 	return (
 		<Grid container direction={"row"} justifyContent={"center"}>
 			<Grid item xs={8}>
@@ -142,7 +192,12 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 					</Grid>
 					<form onSubmit={formik.handleSubmit}>
 						{Fields}
-						<Grid container direction={"row"} justifyContent={"center"} style={{marginTop: "20px"}}>
+						{Pages()}
+						<Grid container direction={"row"} justifyContent={"space-evenly"} style={{marginTop: "20px"}}>
+							<Button
+								variant="contained" color={"warning"}
+								onClick={() => handleSave(formik.values)}
+							>{save.message}</Button>
 							<Button
 								type="submit"
 								variant="contained" color={"success"}

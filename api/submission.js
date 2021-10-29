@@ -1,8 +1,9 @@
 import {setEditor} from "../redux/actions";
 
-export const submitForm = (formId, formData) => async dispatch => {
+export const submitForm = (formId, formData, submitted) => async dispatch => {
   const body = {
     formId,
+    submitted,
     data: formData
   };
   const request

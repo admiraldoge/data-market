@@ -1,3 +1,6 @@
+import SubmitString from "../components/editor/submitInput/SubmitString";
+import React from "react";
+
 export const RICH_TEXT = "richText";
 export const IMAGE = "image";
 export const BUTTON = "button";
