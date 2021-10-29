@@ -20,7 +20,6 @@ import String from "./basic/String";
 import Grid from '@mui/material/Grid';
 import {objectMapper} from "../../utils/editorObjectMapper";
 import Button from "@mui/material/Button";
-import styles from "../../styles/components/Editor.module.scss";
 import {inputTemplates} from "../../statics/inputTemplates";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import {addField, addToArray} from "../../redux/actions";
@@ -31,6 +30,12 @@ import SubmitString from "./submitInput/SubmitString";
 import { submitForm } from "../../api/submission";
 import SubmitCheckBoxInput from "./submitInput/SubmitCheckBoxInput";
 import SubmitPage from "./submitInput/SubmitPage";
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import styles from '../../styles/components/SubmitEditor.module.scss';
+import {useRouter} from "next/dist/client/router";
 
 type editorProps = {
 
@@ -38,6 +43,7 @@ type editorProps = {
 
 const Editor: React.FunctionComponent<editorProps> = ({}) => {
 	const dispatch = useAppDispatch();
+	const router = useRouter();
 	const editor = useAppSelector((state: RootState) => state.editor);
 	const [components, setComponents] = useState([] as any);
   const [dataIsArray, setDataIsArray] = useState(false);
@@ -45,6 +51,7 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
   const [page, setPage] = useState(1);
   const objFromStore = getSimpleEditorValue(editor.object, editor.path);
   const isArrayAux = Array.isArray(objFromStore);
+  const [pagesCmps, setPagesCmps] = useState([] as any);
 
 	const [initialValues, setInitialValues] = useState({} as any);
 
@@ -123,12 +130,14 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 		onSubmit: (values) => {
 			console.log('Form save',values);
 			dispatch(submitForm(editor.object._id, values, true));
+			router.push("/user");
 			//alert(JSON.stringify(values, null, 2));
 		},
 	});
 
 	const handleSave = (values:any) => {
 		dispatch(submitForm(editor.object._id, values, false));
+		router.push("/user");
 	}
 
 	const Fields = editor.object.fields.items.map((field:any, idx:number) => {
@@ -157,12 +166,14 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 
 	const Pages = () => {
 		let pages = {};
+		let lastPage = 1;
 		for(let i = 0; i < editor.object.fields.items.length; i++) {
 			if(pages[editor.object.fields.items[i].page.value]) {
 				pages[editor.object.fields.items[i].page.value] = [...pages[editor.object.fields.items[i].page.value], editor.object.fields.items[i]];
 			} else {
 				pages[editor.object.fields.items[i].page.value] = [editor.object.fields.items[i]];
 			}
+			lastPage = Math.max(lastPage,parseInt(editor.object.fields.items[i].page.value));
 		}
 		console.log(':::Pages object: ',pages);
 		const res = [];
@@ -174,9 +185,19 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 				// @ts-ignore
 				inputsInPage.push(objectMapper(value[i],idx));
 			}
-			res.push(<SubmitPage page={key} currentPage={page} changePage={setPage}>{inputsInPage}</SubmitPage>);
-			if(page === parseInt(key))
-				return (<SubmitPage page={key} currentPage={page} changePage={setPage}>{inputsInPage}</SubmitPage>);
+			res.push(
+				<Slide index={idx} key={idx} className={styles.carouselItemCtn}>
+					<SubmitPage page={key} lastPage={parseInt(key) === lastPage} changePage={setPage}>{inputsInPage}</SubmitPage>
+				</Slide>
+			);
+			console.log("Comparing: ",page,parseInt(key));
+			/*
+			if(page == parseInt(key)) {
+				console.log("Returning page",page,value);
+				return (<SubmitPage page={key} lastPage={parseInt(key) === lastPage} changePage={setPage}>{inputsInPage}</SubmitPage>);
+			}
+
+			 */
 			idx++;
 		}
 		return res;
@@ -185,14 +206,32 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 
 	return (
 		<Grid container direction={"row"} justifyContent={"center"}>
-			<Grid item xs={8}>
+			<Grid item xs={10}>
 				<Grid container direction={"column"}>
 					<Grid container direction={"row"} justifyContent={"center"} alignContent={"center"}>
 						<h1>{editor.object.name.value}</h1>
 					</Grid>
 					<form onSubmit={formik.handleSubmit}>
-						{Fields}
-						{Pages()}
+						<CarouselProvider
+							naturalSlideWidth={1000}
+							naturalSlideHeight={600}
+							totalSlides={2}
+							orientation={"horizontal"}
+							dragEnabled={false}
+							touchEnabled={false}
+						>
+							<div className={styles.carouselItemCtn}>
+								<Slider onClick={(e) => {console.log('clicked')}}>
+									{Pages()}
+								</Slider>
+								<ButtonBack className={styles.backButton}>
+									<ArrowBackIosIcon className={styles.backIcon}/>
+								</ButtonBack>
+								<ButtonNext className={styles.nextButton}>
+									<ArrowForwardIosIcon className={styles.backIcon}/>
+								</ButtonNext>
+							</div>
+						</CarouselProvider>
 						<Grid container direction={"row"} justifyContent={"space-evenly"} style={{marginTop: "20px"}}>
 							<Button
 								variant="contained" color={"warning"}
