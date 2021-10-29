@@ -21,15 +21,15 @@ type stringProps = {
 
 const SubmitCheckBoxInput: React.FC<stringProps> = ({ formik, entity }) => {
 
-	//console.log("Formik checblox entity: ",formik.values, formik.values[entity.id]);
-	const values = formik.values[entity.id];
+	//console.log("Formik checblox entity: ",formik.values, formik.values[entity._id]);
+	const values = formik.values[entity._id];
 	const Options = entity.options.items.map((option:any, idx:number) => {
 		//const isChecked = values.includes('');
-		if(!formik.values[entity.id]) return null;
+		if(!formik.values[entity._id]) return null;
 		return (
 			<FormControlLabel
 				control={
-					<Checkbox checked={formik.values[entity.id][idx]} name={`${entity.id}[${idx}]`} onChange={formik.handleChange}/>
+					<Checkbox checked={formik.values[entity._id][idx]} name={`${entity._id}[${idx}]`} onChange={formik.handleChange}/>
 				}
 				label={option.value}
 			/>
@@ -41,12 +41,12 @@ const SubmitCheckBoxInput: React.FC<stringProps> = ({ formik, entity }) => {
 	        <Grid container direction={"row"} style={{marginBottom: "20px"}}>
 		        {entity.label.value}
 	        </Grid>
-	        <Grid key={entity.id} container direction={"row"} justifyContent={"center"} alignItems={"center"}>
+	        <Grid key={entity._id} container direction={"row"} justifyContent={"center"} alignItems={"center"}>
 		        <Grid item xs={12}>
 			        <FormControl
-				        id={entity.id}
-				        name={entity.id}
-				        error={formik.touched[entity.id] && Boolean(formik.errors[entity.id])}
+				        id={entity._id}
+				        name={entity._id}
+				        error={formik.touched[entity._id] && Boolean(formik.errors[entity._id])}
 				        component="fieldset"
 				        sx={{ m: 3 }}
 				        variant="standard"

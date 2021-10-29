@@ -4,4 +4,10 @@ export const stringTemplate = {
   "value" : ""
 }
 
-export const basicTemplates = [ stringTemplate ];
+export const numberTemplate = {
+  "_template": "number",
+  "_templateName": "Numero",
+  "value" : ""
+}
+
+export const basicTemplates = [ stringTemplate, numberTemplate ];

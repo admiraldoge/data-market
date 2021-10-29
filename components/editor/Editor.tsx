@@ -104,7 +104,7 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 							variant="contained" color={"success"}
 							onClick={(e) => {
 								dispatch(updateFormData(editor.object));
-								router.push(`/`);
+								router.push(`/admin`);
 							}}
 						>Guardar</Button>
 					</Grid>

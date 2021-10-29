@@ -1,7 +1,7 @@
 export const stringInputTemplate = {
   "_template" : "stringInput",
   "_templateName": "Pregunta simple",
-  "id" : "",
+  "_id" : "",
   "label" : {
     "_template": "string",
     "_templateName": "Pregunta",
@@ -11,12 +11,18 @@ export const stringInputTemplate = {
     "_template": "string",
     "_templateName": "Placeholder",
     "value" : ""
-  }
+  },
+  "page": {
+    "_template": "number",
+    "_templateName": "Página",
+    "type": "natural",
+    "value" : "0"
+  },
 }
 export const checkBoxInputTemplate = {
   "_template" : "checkBoxInput",
   "_templateName": "Opción múltiple",
-  "id" : "",
+  "_id" : "",
   "label" : {
     "_template": "string",
     "_templateName": "Pregunta",
@@ -30,7 +36,13 @@ export const checkBoxInputTemplate = {
     ],
     "expandable": true,
     "items": []
-  }
+  },
+  "page": {
+    "_template": "number",
+    "_templateName": "Página",
+    "type": "natural",
+    "value" : "0"
+  },
 }
 
 export const inputTemplates = [stringInputTemplate, checkBoxInputTemplate];

@@ -47,7 +47,10 @@ export default function Album() {
 	const [collectorModalOpen, setCollectorModalOpen] = React.useState(false);
 	const handleOpenCreateModal = () => setCreateModalOpen(true);
 	const handleCloseCreateModal = () => setCreateModalOpen(false);
-	const openCollectorModal = () => setCollectorModalOpen(true);
+	const openCollectorModal = () => {
+		setCollectorModalData({});
+		setCollectorModalOpen(true);
+	}
 	const closeCollectorModal = () => setCollectorModalOpen(false);
 
   useEffect(() => {

@@ -8,6 +8,7 @@ import {updateObject} from "../../../redux/actions";
 import String from "../basic/String";
 import Array from "../basic/Array";
 import styles from "../../../styles/input/CheckBoxInput.module.scss";
+import Number from "../basic/Number";
 
 type editRichText = {
 	key: string,
@@ -26,6 +27,9 @@ const CheckBoxInput: React.FunctionComponent<editRichText>= ({ path}) => {
 			</Grid>
 			<Grid container direction={"row"}>
 				<Array keyName={"options"} path={[...path, 'options']}/>
+			</Grid>
+			<Grid container direction={"row"}>
+				<Number keyName={"options"} path={[...path, 'page']}/>
 			</Grid>
 		</Grid>
 	)

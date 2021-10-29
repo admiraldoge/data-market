@@ -36,6 +36,7 @@ type createFormModal = {
 const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen, handleClose}) => {
 
 	const router = useRouter();
+	const [collector, setCollector] = useState({} as any);
 	const [collectorName, setCollectorName] = useState("");
 	const [isPublic, setIsPublic] = useState(false);
 	const [created, setCreated] = useState(false);
@@ -75,8 +76,9 @@ const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen
 					/>
 				</Grid>
 				{!created && <Button variant="contained" color="success" onClick={async () => {
-					const formCreated = (await createCollector(newCollectorTemplate(data._id, collectorName, "", isPublic))) as any;
-					console.log('Collector created: ', formCreated);
+					const collectorCreated = (await createCollector(newCollectorTemplate(data._id, collectorName, "", isPublic))) as any;
+					console.log('Collector created: ', collectorCreated);
+					setCollector(collectorCreated);
 					setCreated(true);
 				}}
 				>
@@ -89,11 +91,9 @@ const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen
 					variant="outlined"
 					fullWidth
 					style={{marginBottom: "20px"}}
-					value={`http://localhost:3000/c/${data._id}`}
+					value={`http://localhost:3000/c/${collector._id}`}
 				/>}
 				{created && <Button variant="contained" color="error" onClick={async () => {
-					const formCreated = (await createCollector(newCollectorTemplate(data._id, collectorName, "", isPublic))) as any;
-					console.log('Collector created: ', formCreated);
 					handleClose();
 				}}
         >
