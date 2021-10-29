@@ -1,11 +1,8 @@
 import React from "react";
 import {StringType} from "../../../types/form/creation/types";
-import { Formik, Form, useField, useFormikContext } from "formik";
 import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
-import {useAppSelector} from "../../../redux/hooks";
-import {RootState} from "../../../redux/store";
-import {getSimpleEditorValue} from "../../../utils/mapper";
+import styles from '../../../styles/submitInput/SubmitString.module.scss';
 type stringProps = {
     formik: any,
     entity: StringType
@@ -13,7 +10,7 @@ type stringProps = {
 
 const SubmitString: React.FC<stringProps> = ({ formik, entity }) => {
     return (
-        <Grid key={entity._id} container direction={"row"} justifyContent={"center"} alignItems={"center"}>
+        <Grid key={entity._id} className={styles.ctn} container direction={"row"} justifyContent={"center"} alignItems={"center"}>
             <Grid item xs={12}>
                 <TextField
                     fullWidth

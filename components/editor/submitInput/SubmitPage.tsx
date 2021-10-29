@@ -5,28 +5,25 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 type stringProps = {
 	page: string,
-	changePage: any
+	changePage: any,
+	lastPage?: boolean
 };
 
-const SubmitPage: React.FC<stringProps> = ({ page,changePage, children}) => {
+const SubmitPage: React.FC<stringProps> = ({ page,changePage, lastPage= false,children}) => {
     return (
         <Grid container direction={"column"}>
 	        <Grid key={page} container direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
-		        {page !== "1" && <ArrowBackIosIcon onClick={() => {
-			        changePage(parseInt(page) - 1);
-			        console.log("Changing page to: ", parseInt(page) - 1);
-		        }} style={{cursor: "pointer"}}/>}
 		        <Grid item xs={4}>
 			        <Grid container justifyContent={"center"}>
 				        <h3>Página {page}</h3>
 			        </Grid>
 		        </Grid>
-		        <ArrowForwardIosIcon onClick={() => {
-			        changePage(parseInt(page)+1);
-			        console.log("Changing page to: ",parseInt(page)+1);
-		        }} style={{cursor: "pointer"}}/>
 	        </Grid>
-	        {children}
+	        <Grid container direction={"row"} justifyContent={"center"}>
+		        <Grid item xs={10}>
+			        {children}
+		        </Grid>
+	        </Grid>
         </Grid>
     );
 };

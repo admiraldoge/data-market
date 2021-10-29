@@ -1,0 +1,61 @@
+.ctn {
+
+}
+.inputDrawerButtonCtn {
+  cursor: pointer;
+  background-color: #d9d7d7;
+  height: 50px;
+}
+.inputDrawerButtonCtn:hover {
+  background-color: #aba8a8;
+}
+.inputDrawerButtonCtn:active {
+  background-color: #969393;
+}
+.addField {
+  background-color: #d9d7d7;
+  height: 100px;
+  margin-bottom: 20px;
+}
+.saveBtn {
+  margin-bottom: 20px;
+}
+
+//CAROUSEL PROVIDER STYLES
+.carouselCtn {
+  height: 60vh;
+}
+.carouselItemCtn {
+  position: relative;
+}
+.backButton {
+  position: absolute;
+  background-color: transparent;
+  border: 0;
+  top: 50%;
+  @include respond-to('small'){
+    top: 15%;
+  }
+  left: 0;
+}
+.backIcon {
+  color: black;
+  transform: scaleY(1.7) scaleX(1.5);
+  background-color: transparent;
+  border: 0;
+}
+.nextButton {
+  position: absolute;
+  background-color: transparent;
+  border: 0;
+  top: 50%;
+  @include respond-to('small'){
+    top: 15%;
+  }
+  right: 0;
+}
+.nextIcon {
+  color: black;
+  transform: scaleY(1.7) scaleX(1.5);
+  background-color: transparent;
+}
