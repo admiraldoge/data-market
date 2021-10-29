@@ -16,7 +16,7 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Navbar from '../../components/navbar/navbar';
-import { read } from '../../api/forms';
+import { read, clone } from '../../api/forms';
 import { useEffect, useState } from 'react';
 import { StyledEngineProvider } from '@mui/material/styles';
 import {useRouter} from "next/dist/client/router";
@@ -63,8 +63,12 @@ export default function Album() {
       alert(error);
     });
   }, []);
-  const handleChange= (() => {});
-  const clone = (() => {
+  const clon = ((id: any) => {
+    clone(id).then( (res) => {
+      router.push('/admin');
+    }).catch( (error) => {
+      alert(error);
+    });
     alert("formulario clonado");
   })
   const report = (() => {
@@ -120,7 +124,7 @@ export default function Album() {
                       action={
                         <>
                           <IconButton aria-label="settings" onClick={() => {
-                          clone();
+                          clon(form._id);
                         }}>
                           <CopyAll />
                         </IconButton>
@@ -151,7 +155,7 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" onClick={() => {router.push(`/c/${form._id}`)}}>Llenar</Button>
+                    <Button size="small" onClick={() => {router.push(`forms/${form._id}/preview`)}}>Preview</Button>
                     <Button size="small" onClick={() => {router.push(`forms/${form._id}/edit`)}}>Modificar</Button>
                     <Button size="small" onClick={() => {
                     	setCollectorModalData(form);
