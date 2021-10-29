@@ -32,6 +32,14 @@ export const getPublicFormData = (collectorId) => async dispatch => {
   dispatch(setEditor({object: response.data.form}));
 };
 
+export const getPreview = (formId) => async dispatch => {
+  const request
+    = await fetch(`${process.env.BACK_END_URL}/forms/${formId}`, {method: "GET", credentials: 'include',});
+  const response = await request.json();
+  console.log('Response public? data: ',response);
+  dispatch(setEditor({object: response}));
+};
+
 export const updateFormData = (form) => async dispatch => {
   const request
     = await fetch(`${process.env.BACK_END_URL}/forms/${form._id}`,
