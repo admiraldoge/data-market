@@ -13,3 +13,9 @@ export const createCollector = async (collector) => {
   console.log('Response data: ',response);
   return response.data;
 };
+
+export const read = async () => {
+  const request  = await fetch(`${process.env.BACK_END_URL}/collectors?page=1&limit=100`);
+  const response = await request.json();
+  return response;
+}
