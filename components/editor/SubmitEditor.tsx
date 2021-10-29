@@ -38,10 +38,10 @@ import styles from '../../styles/components/SubmitEditor.module.scss';
 import {useRouter} from "next/dist/client/router";
 
 type editorProps = {
-
+	isPreview?: boolean
 }
 
-const Editor: React.FunctionComponent<editorProps> = ({}) => {
+const Editor: React.FunctionComponent<editorProps> = ({isPreview = false}) => {
 	const dispatch = useAppDispatch();
 	const router = useRouter();
 	const editor = useAppSelector((state: RootState) => state.editor);
@@ -139,6 +139,9 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 		dispatch(submitForm(editor.object._id, values, false));
 		router.push("/user");
 	}
+	const handleGoBack = (values:any) => {
+		router.push("/admin");
+	}
 
 	const Fields = editor.object.fields.items.map((field:any, idx:number) => {
 		//console.log('Field: ',field);
@@ -233,14 +236,18 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 							</div>
 						</CarouselProvider>
 						<Grid container direction={"row"} justifyContent={"space-evenly"} style={{marginTop: "20px"}}>
-							<Button
+							{!isPreview && <Button
 								variant="contained" color={"warning"}
 								onClick={() => handleSave(formik.values)}
-							>{save.message}</Button>
-							<Button
+							>{save.message}</Button>}
+							{!isPreview && <Button
 								type="submit"
 								variant="contained" color={"success"}
-							>{submit.message}</Button>
+							>{submit.message}</Button>}
+							{isPreview && <Button
+                variant="contained" color={"success"}
+                onClick={() => handleGoBack(formik.values)}
+              >Volver</Button>}
 						</Grid>
 					</form>
 				</Grid>
