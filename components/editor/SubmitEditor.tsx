@@ -35,6 +35,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import styles from '../../styles/components/SubmitEditor.module.scss';
+import {useRouter} from "next/dist/client/router";
 
 type editorProps = {
 
@@ -42,6 +43,7 @@ type editorProps = {
 
 const Editor: React.FunctionComponent<editorProps> = ({}) => {
 	const dispatch = useAppDispatch();
+	const router = useRouter();
 	const editor = useAppSelector((state: RootState) => state.editor);
 	const [components, setComponents] = useState([] as any);
   const [dataIsArray, setDataIsArray] = useState(false);
@@ -128,12 +130,14 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 		onSubmit: (values) => {
 			console.log('Form save',values);
 			dispatch(submitForm(editor.object._id, values, true));
+			router.push("/user");
 			//alert(JSON.stringify(values, null, 2));
 		},
 	});
 
 	const handleSave = (values:any) => {
 		dispatch(submitForm(editor.object._id, values, false));
+		router.push("/user");
 	}
 
 	const Fields = editor.object.fields.items.map((field:any, idx:number) => {
@@ -213,9 +217,11 @@ const Editor: React.FunctionComponent<editorProps> = ({}) => {
 							naturalSlideHeight={600}
 							totalSlides={2}
 							orientation={"horizontal"}
+							dragEnabled={false}
+							touchEnabled={false}
 						>
 							<div className={styles.carouselItemCtn}>
-								<Slider>
+								<Slider onClick={(e) => {console.log('clicked')}}>
 									{Pages()}
 								</Slider>
 								<ButtonBack className={styles.backButton}>
