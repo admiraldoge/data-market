@@ -38,6 +38,9 @@ export default function PersistentDrawerLeft() {
       <Button color="inherit" onClick={() => router.push('/admin/users')}>
         Usuarios
       </Button>
+      <Button color="inherit" onClick={() => router.push('/admin/collectors')}>
+        Recolectores
+      </Button>
       <Button color="inherit" onClick={() => router.push('/')}>
         Sign out
       </Button>
