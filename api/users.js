@@ -1,7 +1,7 @@
 export const register = async (user) => {
     const request
         = await fetch(
-            'http://localhost:8080/users',
+            `${process.env.BACK_END_URL}/users`,
         {
             headers: {
                 'Content-Type': 'application/json'
@@ -16,7 +16,7 @@ export const register = async (user) => {
 export const update = async (id, user) => {
   const request
       = await fetch(
-          'http://localhost:8080/users/'+id,
+          `${process.env.BACK_END_URL}/users/`+id,
       {
           headers: {
               'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ export const update = async (id, user) => {
 export const login = async (credentials) => {
   const request
     = await fetch(
-    'http://localhost:8080/users/auth',
+    `${process.env.BACK_END_URL}/users/auth`,
     {
       headers: {
         'Content-Type': 'application/json'
@@ -45,16 +45,16 @@ export const login = async (credentials) => {
 };
 
 export const getAll = async () => {
-  const request  = await fetch('http://localhost:8080/users');
+  const request  = await fetch(`${process.env.BACK_END_URL}/users`);
   const response = await request.json();
   return response.items;
 }
 
 export const del = async (id) => {
-  alert('http://localhost:8080/users/'+id)
+  alert(`${process.env.BACK_END_URL}`+id)
   const request
       = await fetch(
-          'http://localhost:8080/users/'+id,
+        `${process.env.BACK_END_URL}`+id,
       {
           method: "DELETE",
       });
