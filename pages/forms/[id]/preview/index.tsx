@@ -16,7 +16,7 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
 		<Provider store={store}>
 			<Grid container direction={"row"} className={styles.ctn}>
 				<Grid item xs={12}>
-					<FillForm query={query}/>
+					<FillForm query={query} isPreview={true}/>
 				</Grid>
 			</Grid>
 		</Provider>
