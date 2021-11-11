@@ -111,6 +111,12 @@ export default function Album() {
                 </ListItemIcon>
                 <ListItemText primary="Incompletos" />
               </ListItem>
+              <ListItem button key="Forms" onClick={() => router.push('/user/activity')}>
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Activity" />
+              </ListItem>
           </List>
         </Box>
       </Drawer>
