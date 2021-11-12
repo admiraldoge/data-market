@@ -32,6 +32,7 @@ const CreateFormModal: React.FC<createFormModal> = ({open, handleOpen, handleClo
 
 	const router = useRouter();
 	const [formName, setFormName] = useState();
+	const [formPoints, setFormPoints] = useState();
 
 	return (
 		<Modal
@@ -56,8 +57,18 @@ const CreateFormModal: React.FC<createFormModal> = ({open, handleOpen, handleClo
 					value={formName}
 					onChange={(e) => setFormName(e.currentTarget.value)}
 				/>
+				<TextField
+					id="outlined-basic"
+					label="Puntos"
+					placeholder="Puntos"
+					variant="outlined"
+					fullWidth
+					style={{marginBottom: "20px"}}
+					value={formPoints}
+					onChange={(e) => setFormPoints(e.currentTarget.value)}
+				/>
 				<Button variant="contained" color="success" onClick={ async () => {
-					const formCreated = (await createForm(newFormTemplate(formName))) as any;
+					const formCreated = (await createForm(newFormTemplate(formName, formPoints))) as any;
 					console.log('Form created: ',formCreated);
 					handleClose();
 					router.push(`forms/${formCreated._id}/edit`);

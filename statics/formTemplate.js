@@ -20,11 +20,17 @@ export const formTemplate = {
     "value": "",
     "_templateName": "Nombre del formulario",
     "_template": "string",
-  }
+  },
+  "points": {
+    "value": 0,
+    "_templateName": "Puntos",
+    "_template": "number",
+  },
 }
 
-export const newFormTemplate = (name) => {
+export const newFormTemplate = (name, points) => {
   let template = JSON.parse(JSON.stringify(formTemplate));
+  template.points.value = parseInt(points);
   template.name.value = name;
   return template;
 }
