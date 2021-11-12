@@ -44,7 +44,7 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
-    router.push('/user');
+    router.push('/admin');
   };
 
   return (

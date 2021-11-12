@@ -92,7 +92,7 @@ export default function Album() {
               justifyContent="center"
             >
               <Button variant="contained" onClick={() => router.push('/user/sign-in')}>Log in User</Button>
-              <Button variant="outlined" onClick={() => router.push('/user/sign-in')}>Log In Admin</Button>
+              <Button variant="outlined" onClick={() => router.push('/admin/sign-in')}>Log In Admin</Button>
             </Stack>
           </Container>
         </Box>

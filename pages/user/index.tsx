@@ -158,7 +158,7 @@ export default function Album() {
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
                     <CardHeader
-                      title={collector.form.name.value}
+                      title={collector.name}
                     />
                   <CardMedia
                     component="img"

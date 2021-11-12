@@ -75,7 +75,7 @@ export default function SignIn() {
     const [referralPoints, setReferralPoints] = useState([]);
 
     useEffect(() => {
-        readUserReport("618b5d2026591729993dff9c").then( (res) => {
+        readUserReport("618df0b0bc31fe1ced04f827").then( (res) => {
           var aux;
           const color = "hsl(239, 70%, 50%)"
           aux = res.data.submissions.data;
@@ -280,7 +280,7 @@ export default function SignIn() {
             }
         ]}
     />
-    </div>    
+    </div>
     </>
     );
 };
