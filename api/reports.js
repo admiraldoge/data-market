@@ -8,3 +8,9 @@ export const readUserReport = async (userId) => {
   const response = await request.json();
   return response;
 };
+
+export const readCollectorReport = async (collectorId) => {
+  const request = await fetch(`${process.env.BACK_END_URL}/reports/collectors/${collectorId}/submissions`);
+  const response = await request.json();
+  return response;
+};

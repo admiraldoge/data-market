@@ -1,6 +1,3 @@
-        <header className="flex bg-gray-900 m-5 p-5 shadow-lg rounded-lg">
-          <h1 className="text-2xl text-teal-400">PB Tech Dashboard</h1>
-        </header>
 // install (please make sure versions match peerDependencies)
 // yarn add @nivo/core @nivo/line
 import * as React from 'react';

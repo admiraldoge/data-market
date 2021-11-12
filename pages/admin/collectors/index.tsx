@@ -65,7 +65,9 @@ export default function Album() {
 	const handleCloseCreateModal = () => setCreateModalOpen(false);
 	const openCollectorModal = () => setCollectorModalOpen(true);
 	const closeCollectorModal = () => setCollectorModalOpen(false);
-
+  const report = ((collectorId: string) => {
+    router.push('/collectors/report/'+collectorId);
+  })
   useEffect(() => {
     read().then( (res) => {
       setForms(res.data.items);
@@ -123,7 +125,16 @@ export default function Album() {
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
                     <CardHeader
-                      title={form.form.name.value}
+                      action={
+                        <>
+                        <IconButton aria-label="settings" onClick={() => {
+                          report(form._id);
+                        }}>
+                          <Assessment />
+                        </IconButton>
+                        </>
+                      }
+                      title={form.name.value}
                     />
                   <CardMedia
                     component="img"
