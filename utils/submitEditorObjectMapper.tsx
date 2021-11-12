@@ -11,26 +11,9 @@ import SubmitCheckBoxInput from "../components/editor/submitInput/SubmitCheckBox
 export const objectMapper = (key:any, obj:any, editor:any, path?: any) => {
 	const realPath = path ? path : editor.path;
 	console.log('999Mapping: ',key,obj, 'with path: ',realPath);
-	switch (obj._template) {
-		case STRING_INPUT:
-			return (<SubmitString key={key} path={[...realPath,key]}/>);
-			break;
-		case CHECK_BOX_INPUT:
-			return (<SubmitCheckBoxInput key={key} path={[...realPath,key]}/>);
-			break;
-		default:
-			return null;
-	}
+
 }
 
 const ObjectItem = ( key:any, obj:any) => {
-	return (
-		<Grid container spacing={2} key={key}>
-			<Grid item xs={6} md={8}>
-				<Grid item>
-					OBJECT ITEM
-				</Grid>
-			</Grid>
-		</Grid>
-	)
+
 }

@@ -11,6 +11,7 @@ import {useRouter} from "next/dist/client/router";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from "@material-ui/core/Grid";
+import { SxProps } from '@mui/system';
 
 const style = {
 	position: 'absolute',
@@ -24,7 +25,7 @@ const style = {
 	boxShadow: 24,
 	p: 4,
 	backgroundColor: "white"
-};
+} as SxProps;
 
 type createFormModal = {
 	data: any,

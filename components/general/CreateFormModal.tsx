@@ -8,6 +8,7 @@ import {useState} from "react";
 import {createForm} from "../../api/form";
 import {newFormTemplate} from "../../statics/formTemplate";
 import {useRouter} from "next/dist/client/router";
+import {SxProps} from "@mui/system";
 
 const style = {
 	position: 'absolute',
@@ -20,7 +21,7 @@ const style = {
 	boxShadow: 24,
 	p: 4,
 	backgroundColor: "white"
-};
+}  as SxProps;
 
 type createFormModal = {
 	open:boolean,
@@ -31,7 +32,7 @@ type createFormModal = {
 const CreateFormModal: React.FC<createFormModal> = ({open, handleOpen, handleClose}) => {
 
 	const router = useRouter();
-	const [formName, setFormName] = useState();
+	const [formName, setFormName] = useState("");
 
 	return (
 		<Modal

@@ -72,26 +72,32 @@ const Editor: React.FunctionComponent<editorProps> = ({id, isPreview = false}) =
 		const obj = getSimpleEditorValue(editor.object, editor.path);
 		let newComponents = [] as any;
 		console.log('Obj: ',obj);
+		let idx = 0;
 		for(const [key, value] of Object.entries(obj)) {
 			console.log('EDITOR OBJECT: ',key)
 			if(key[0] === "_") continue;
 			//Put name first
 			if(key === "fields") {
-				newComponents.push(objectMapper(key, value, editor));
+				newComponents.push(objectMapper(value, idx));
 			} else {
-				newComponents.unshift(objectMapper(key, value, editor));
+				newComponents.unshift(objectMapper(value, idx));
 			}
+			idx++;
 		}
 		setComponents(newComponents);
 		let newInitialValues = {} as any;
 		for(let i = 0; i < editor.object.fields.items.length; i++) {
+			// @ts-ignore
 			switch (editor.object.fields.items[i]._template) {
 				case "stringInput":
+					// @ts-ignore
 					newInitialValues[editor.object.fields.items[i]._id] = "";
 					break;
 				case "checkBoxInput":
 					let options = [];
+					// @ts-ignore
 					for(let j in editor.object.fields.items[i].options.items) options.push(false);
+					// @ts-ignore
 					newInitialValues[editor.object.fields.items[i]._id] = options;
 					break;
 			}
@@ -130,6 +136,7 @@ const Editor: React.FunctionComponent<editorProps> = ({id, isPreview = false}) =
 		enableReinitialize: true,
 		onSubmit: (values) => {
 			console.log('Form save',values);
+			// @ts-ignore
 			dispatch(submitForm(editor.object._id, id, values, true));
 			router.push("/user");
 			//alert(JSON.stringify(values, null, 2));
@@ -137,6 +144,7 @@ const Editor: React.FunctionComponent<editorProps> = ({id, isPreview = false}) =
 	});
 
 	const handleSave = (values:any) => {
+		// @ts-ignore
 		dispatch(submitForm(editor.object._id, id, values, false));
 		router.push("/user");
 	}
@@ -172,11 +180,15 @@ const Editor: React.FunctionComponent<editorProps> = ({id, isPreview = false}) =
 		let pages = {};
 		let lastPage = 1;
 		for(let i = 0; i < editor.object.fields.items.length; i++) {
+			// @ts-ignore
 			if(pages[editor.object.fields.items[i].page.value]) {
+				// @ts-ignore
 				pages[editor.object.fields.items[i].page.value] = [...pages[editor.object.fields.items[i].page.value], editor.object.fields.items[i]];
 			} else {
+				// @ts-ignore
 				pages[editor.object.fields.items[i].page.value] = [editor.object.fields.items[i]];
 			}
+			// @ts-ignore
 			lastPage = Math.max(lastPage,parseInt(editor.object.fields.items[i].page.value));
 		}
 		console.log(':::Pages object: ',pages);
@@ -213,7 +225,10 @@ const Editor: React.FunctionComponent<editorProps> = ({id, isPreview = false}) =
 			<Grid item xs={10}>
 				<Grid container direction={"column"}>
 					<Grid container direction={"row"} justifyContent={"center"} alignContent={"center"}>
-						<h1>{editor.object.name.value}</h1>
+						<h1>{
+							// @ts-ignore
+							editor.object.name.value
+						}</h1>
 					</Grid>
 					<form onSubmit={formik.handleSubmit}>
 						<CarouselProvider

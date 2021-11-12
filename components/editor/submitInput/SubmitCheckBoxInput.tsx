@@ -14,9 +14,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import Checkbox from '@mui/material/Checkbox';
 import {Field} from "ast-types";
+import {checkBoxInputType} from "../../../statics/types";
 type stringProps = {
     formik: any,
-    entity: StringType
+    entity: checkBoxInputType
 };
 
 const SubmitCheckBoxInput: React.FC<stringProps> = ({ formik, entity }) => {
