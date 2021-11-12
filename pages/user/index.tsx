@@ -53,10 +53,11 @@ const drawerWidth = 240;
 const theme = createTheme();
 
 export default function Album() {
-  const [forms, setForms] = useState([]);
+  const [collectors, setCollector] = useState([]);
   const [value, setValue] = useState("");
 	const router = useRouter();
 	const [collectorModalData, setCollectorModalData] = useState({} as any);
+	const [originalCollectorModalData, setOriginalCollectorModalData] = useState({} as any);
 	const [createModalOpen, setCreateModalOpen] = React.useState(false);
 	const [collectorModalOpen, setCollectorModalOpen] = React.useState(false);
 	const handleOpenCreateModal = () => setCreateModalOpen(true);
@@ -66,7 +67,7 @@ export default function Album() {
 
   useEffect(() => {
     read().then( (res) => {
-      setForms(res.data.items);
+      setCollector(res.data.items);
     }).catch( (error) => {
       alert(error);
     });
@@ -145,13 +146,13 @@ export default function Album() {
         <Container sx={{ py: 12 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {forms.map((form:any) => (
-              <Grid item key={form} xs={12} sm={6} md={4}>
+            {collectors.map((collector:any) => (
+              <Grid item key={collector} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                > 
+                >
                     <CardHeader
-                      title={form.form.name.value}
+                      title={collector.form.name.value}
                     />
                   <CardMedia
                     component="img"
@@ -159,19 +160,24 @@ export default function Album() {
                       // 16:9
                       pt: '56.25%',
                     }}
-                    image={form.form.thumbnail.src}
+                    image={collector.form.thumbnail.src}
                     alt="random"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {form.form.name.value}
+                      {collector.form.name.value}
                     </Typography>
                     <Typography>
 
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" onClick={() => {router.push(`/c/${form._id}`)}}>Llenar</Button>
+                    <Button size="small" onClick={() => {router.push(`/c/${collector._id}`)}}>Llenar</Button>
+	                  <Button size="small" onClick={() => {
+		                  setCollectorModalData(collector.form);
+		                  setOriginalCollectorModalData(collector);
+		                  openCollectorModal();
+	                  }}>Compartir</Button>
                   </CardActions>
                 </Card>
               </Grid>
@@ -180,6 +186,7 @@ export default function Album() {
         </Container>
       </main>
       </Box>
+	    <CreateCollectorModal data={collectorModalData} originalCollectorData={originalCollectorModalData} open={collectorModalOpen} handleOpen={openCollectorModal} handleClose={closeCollectorModal} referral={true}/>
     </Box>
   );
 }
