@@ -23,14 +23,20 @@ export const formTemplate = {
   },
   "points": {
     "value": 0,
-    "_templateName": "Puntos",
+    "_templateName": "Puntos al llenar",
+    "_template": "number",
+  },
+  "sharePoints": {
+    "value": 0,
+    "_templateName": "Puntos al compartir",
     "_template": "number",
   },
 }
 
-export const newFormTemplate = (name, points) => {
+export const newFormTemplate = (name, points, sharePoints) => {
   let template = JSON.parse(JSON.stringify(formTemplate));
   template.points.value = parseInt(points);
+  template.sharePoints.value = parseInt(sharePoints);
   template.name.value = name;
   return template;
 }

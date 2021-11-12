@@ -38,10 +38,11 @@ import styles from '../../styles/components/SubmitEditor.module.scss';
 import {useRouter} from "next/dist/client/router";
 
 type editorProps = {
+	id: string,
 	isPreview?: boolean
 }
 
-const Editor: React.FunctionComponent<editorProps> = ({isPreview = false}) => {
+const Editor: React.FunctionComponent<editorProps> = ({id, isPreview = false}) => {
 	const dispatch = useAppDispatch();
 	const router = useRouter();
 	const editor = useAppSelector((state: RootState) => state.editor);
@@ -129,7 +130,7 @@ const Editor: React.FunctionComponent<editorProps> = ({isPreview = false}) => {
 		enableReinitialize: true,
 		onSubmit: (values) => {
 			console.log('Form save',values);
-			dispatch(submitForm(editor.object._id, values, true));
+			dispatch(submitForm(editor.object._id, id, values, true));
 			router.push("/user");
 			//alert(JSON.stringify(values, null, 2));
 		},

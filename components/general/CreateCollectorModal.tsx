@@ -40,6 +40,8 @@ const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen
 	const [collectorName, setCollectorName] = useState("");
 	const [isPublic, setIsPublic] = useState(false);
 	const [created, setCreated] = useState(false);
+	const [formPoints, setFormPoints] = useState();
+	const [formSharePoints, setFormSharePoints] = useState();
 
 	return (
 		<Modal
@@ -75,8 +77,32 @@ const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen
 						label="Público"
 					/>
 				</Grid>
+				<Grid container direction={"row"} style={{marginBottom: "20px"}}>
+					<TextField
+						id="outlined-basic"
+						label="Puntos al llenar"
+						placeholder="100"
+						variant="outlined"
+						fullWidth
+						style={{marginBottom: "20px"}}
+						value={formPoints}
+						onChange={(e) => setFormPoints(e.currentTarget.value)}
+					/>
+				</Grid>
+				<Grid container direction={"row"} style={{marginBottom: "20px"}}>
+					<TextField
+						id="outlined-basic"
+						label="Puntos al compartir"
+						placeholder="20"
+						variant="outlined"
+						fullWidth
+						style={{marginBottom: "20px"}}
+						value={formSharePoints}
+						onChange={(e) => setFormSharePoints(e.currentTarget.value)}
+					/>
+				</Grid>
 				{!created && <Button variant="contained" color="success" onClick={async () => {
-					const collectorCreated = (await createCollector(newCollectorTemplate(data._id, collectorName, "", isPublic))) as any;
+					const collectorCreated = (await createCollector(newCollectorTemplate(data._id, collectorName, "", isPublic, formPoints, formSharePoints))) as any;
 					console.log('Collector created: ', collectorCreated);
 					setCollector(collectorCreated);
 					setCreated(true);

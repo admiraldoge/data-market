@@ -29,7 +29,7 @@ const FillForm: React.FunctionComponent<pageProps> = ({query, isPreview = false}
 			<div style={{height: "100%"}}>
 				<Grid container direction={"row"} justifyContent={"center"}>
 					<Grid item xs={12} sm={10} md={6} lg={5} style={{height: "center"}}>
-						<SubmitEditor isPreview={isPreview}/>
+						<SubmitEditor id={id} isPreview={isPreview}/>
 					</Grid>
 				</Grid>
 			</div>
