@@ -15,9 +15,8 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
 
     useEffect(() => {
         readCollectorReport(query.id).then( (res) => {
-          var aux;
           const color = "hsl(239, 70%, 50%)"
-          aux = res.data.timeline;
+          let aux = res.data.timeLine;
           aux[0].color = color;
           setSubmissions(aux);
         }).catch( (error) => {
@@ -90,7 +89,7 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
             }
         ]}
     />
-    </div>    
+    </div>
     </>
     )
 }
