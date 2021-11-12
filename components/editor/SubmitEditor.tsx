@@ -137,7 +137,7 @@ const Editor: React.FunctionComponent<editorProps> = ({id, isPreview = false}) =
 	});
 
 	const handleSave = (values:any) => {
-		dispatch(submitForm(editor.object._id, values, false));
+		dispatch(submitForm(editor.object._id, id, values, false));
 		router.push("/user");
 	}
 	const handleGoBack = (values:any) => {

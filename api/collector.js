@@ -15,7 +15,7 @@ export const createCollector = async (collector) => {
 };
 
 export const read = async () => {
-  const request  = await fetch(`${process.env.BACK_END_URL}/collectors?page=1&limit=100`);
+  const request  = await fetch(`${process.env.BACK_END_URL}/collectors?page=1&limit=100`, {credentials: 'include'});
   const response = await request.json();
   return response;
 }

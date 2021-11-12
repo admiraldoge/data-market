@@ -30,18 +30,19 @@ type createFormModal = {
 	data: any,
 	open:boolean,
 	handleOpen:any,
-	handleClose:any
+	handleClose:any,
+	referral?: boolean,
+	originalCollectorData?: any
 }
 
-const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen, handleClose}) => {
-
+const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen, handleClose, referral= false, originalCollectorData}) => {
 	const router = useRouter();
 	const [collector, setCollector] = useState({} as any);
 	const [collectorName, setCollectorName] = useState("");
 	const [isPublic, setIsPublic] = useState(false);
 	const [created, setCreated] = useState(false);
-	const [formPoints, setFormPoints] = useState();
-	const [formSharePoints, setFormSharePoints] = useState();
+	const [formPoints, setFormPoints] = useState("" );
+	const [formSharePoints, setFormSharePoints] = useState( "" );
 
 	return (
 		<Modal
@@ -77,7 +78,7 @@ const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen
 						label="Público"
 					/>
 				</Grid>
-				<Grid container direction={"row"} style={{marginBottom: "20px"}}>
+				{!referral && <Grid container direction={"row"} style={{marginBottom: "20px"}}>
 					<TextField
 						id="outlined-basic"
 						label="Puntos al llenar"
@@ -88,8 +89,8 @@ const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen
 						value={formPoints}
 						onChange={(e) => setFormPoints(e.currentTarget.value)}
 					/>
-				</Grid>
-				<Grid container direction={"row"} style={{marginBottom: "20px"}}>
+				</Grid>}
+				{!referral && <Grid container direction={"row"} style={{marginBottom: "20px"}}>
 					<TextField
 						id="outlined-basic"
 						label="Puntos al compartir"
@@ -100,10 +101,17 @@ const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen
 						value={formSharePoints}
 						onChange={(e) => setFormSharePoints(e.currentTarget.value)}
 					/>
-				</Grid>
+				</Grid>}
 				{!created && <Button variant="contained" color="success" onClick={async () => {
-					const collectorCreated = (await createCollector(newCollectorTemplate(data._id, collectorName, "", isPublic, formPoints, formSharePoints))) as any;
-					console.log('Collector created: ', collectorCreated);
+					const collectorCreated
+						= (await createCollector(newCollectorTemplate(
+							data._id,
+						collectorName,
+						"",
+						isPublic,
+						referral ? originalCollectorData.fillPoints.value : formPoints,
+						referral ? originalCollectorData.sharePoints.value : formSharePoints,
+					))) as any;
 					setCollector(collectorCreated);
 					setCreated(true);
 				}}
