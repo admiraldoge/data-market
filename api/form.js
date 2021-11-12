@@ -32,6 +32,13 @@ export const getPublicFormData = (collectorId) => async dispatch => {
   dispatch(setEditor({object: response.data.form}));
 };
 
+export const getCollectorData = async (collectorId) => {
+  const request
+    = await fetch(`${process.env.BACK_END_URL}/collectors/${collectorId}`, {method: "GET", credentials: 'include',});
+  const response = await request.json();
+  return response.data;
+};
+
 export const getPreview = (formId) => async dispatch => {
   const request
     = await fetch(`${process.env.BACK_END_URL}/forms/${formId}`, {method: "GET", credentials: 'include',});
