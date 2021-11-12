@@ -66,7 +66,7 @@ export default function Album() {
 	const openCollectorModal = () => setCollectorModalOpen(true);
 	const closeCollectorModal = () => setCollectorModalOpen(false);
   const report = ((collectorId: string) => {
-    router.push('/collectors/report/'+collectorId);
+    router.push('/admin/collectors/report/'+collectorId);
   })
   useEffect(() => {
     read().then( (res) => {
