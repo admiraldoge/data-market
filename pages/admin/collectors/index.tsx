@@ -36,6 +36,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import {downloadCollectorSubmission} from '../../../api/reports';
+
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -119,7 +121,7 @@ export default function Album() {
               <Grid item key={form} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                > 
+                >
                     <CardHeader
                       title={form.form.name.value}
                     />
@@ -141,6 +143,10 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
+	                  <Button size="small" onClick={() => {
+	                  	console.log('collector',form);
+		                  downloadCollectorSubmission(form._id);
+	                  }}>Descargar Respuestas</Button>
                   </CardActions>
                 </Card>
               </Grid>
