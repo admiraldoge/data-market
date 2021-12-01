@@ -108,7 +108,6 @@ export default function SignIn() {
         axisTop={null}
         axisRight={null}
         axisBottom={{
-            orient: 'bottom',
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
@@ -117,7 +116,6 @@ export default function SignIn() {
             legendPosition: 'middle'
         }}
         axisLeft={{
-            orient: 'left',
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
@@ -169,7 +167,6 @@ export default function SignIn() {
         axisTop={null}
         axisRight={null}
         axisBottom={{
-            orient: 'bottom',
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
@@ -178,7 +175,6 @@ export default function SignIn() {
             legendPosition: 'middle'
         }}
         axisLeft={{
-            orient: 'left',
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
@@ -230,7 +226,6 @@ export default function SignIn() {
         axisTop={null}
         axisRight={null}
         axisBottom={{
-            orient: 'bottom',
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
@@ -239,7 +234,6 @@ export default function SignIn() {
             legendPosition: 'middle'
         }}
         axisLeft={{
-            orient: 'left',
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
