@@ -29,6 +29,7 @@ const SubmitCheckBoxInput: React.FC<stringProps> = ({ formik, entity }) => {
 		if(!formik.values[entity._id]) return null;
 		return (
 			<FormControlLabel
+				key={entity._id}
 				control={
 					<Checkbox checked={formik.values[entity._id][idx]} name={`${entity._id}[${idx}]`} onChange={formik.handleChange}/>
 				}
