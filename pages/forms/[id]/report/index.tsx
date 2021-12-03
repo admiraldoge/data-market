@@ -24,7 +24,6 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
           aux.data[0].color = color;
           setSubmissions(aux);
         }).catch( (error) => {
-          alert(error);
         });
       }, []);
     return (

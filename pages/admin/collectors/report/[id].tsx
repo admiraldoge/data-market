@@ -24,7 +24,6 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
           aux.timeLine[0].color = color;
           setSubmissions(aux);
         }).catch( (error) => {
-          alert(error);
         });
       }, []);
     return (

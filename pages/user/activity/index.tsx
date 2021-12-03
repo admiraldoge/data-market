@@ -89,9 +89,7 @@ export default function SignIn() {
           aux = res.data.referralPoints;
           aux.points[0].color = color;
           setReferralPoints(aux);
-          console.log(aux)
         }).catch( (error) => {
-          alert(error);
         });
       }, []);
     return (
