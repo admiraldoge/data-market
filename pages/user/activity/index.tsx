@@ -100,7 +100,7 @@ export default function SignIn() {
         <header className="flex bg-gray-900 m-5 p-5 shadow-lg rounded-lg">
           <h1 className="text-2xl text-teal-400">Actividad del perfil</h1>
         </header>
-        <div style={{height: 400}}>
+        <div style={{height: 500}}>
         <ResponsiveLine
         data={submissions.data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
