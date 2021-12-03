@@ -4,7 +4,7 @@ import type {GetServerSideProps, NextPage} from 'next'
 import React, {useEffect, useState} from "react";
 import {getCollectorData, getPublicFormData} from "../../../../api/form";
 import { ResponsiveLine } from '@nivo/line';
-import { readCollectorReport } from '../../../../api/reports';
+import { readFormReport } from '../../../../api/reports';
 import Navbar from '../../../../components/navbar/navbar';
 import { Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
 import FunctionsIcon from '@mui/icons-material/Functions';
@@ -18,10 +18,10 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
 
 
     useEffect(() => {
-        readCollectorReport(query.id).then( (res) => {
+        readFormReport(query.id).then( (res) => {
           const color = "hsl(239, 70%, 50%)"
           let aux = res.data;
-          aux.timeLine[0].color = color;
+          aux.data[0].color = color;
           setSubmissions(aux);
         }).catch( (error) => {
         });
@@ -149,7 +149,7 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
             <FunctionsIcon/>
           </Avatar>
         </Grid>
-
+        
       </Grid>
     </CardContent>
   </Card>

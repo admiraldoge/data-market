@@ -89,9 +89,7 @@ export default function SignIn() {
           aux = res.data.referralPoints;
           aux.points[0].color = color;
           setReferralPoints(aux);
-          console.log(aux)
         }).catch( (error) => {
-          alert(error);
         });
       }, []);
     return (
@@ -100,7 +98,7 @@ export default function SignIn() {
         <header className="flex bg-gray-900 m-5 p-5 shadow-lg rounded-lg">
           <h1 className="text-2xl text-teal-400">Actividad del perfil</h1>
         </header>
-        <div style={{height: 400}}>
+        <div style={{height: 500}}>
         <ResponsiveLine
         data={submissions.data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -222,7 +220,7 @@ export default function SignIn() {
     </CardContent>
   </Card>
     </div>
-    <div style={{height: 400}}>
+    <div style={{height: 500}}>
     <ResponsiveLine
         data={points.points}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -344,7 +342,7 @@ export default function SignIn() {
     </CardContent>
   </Card>
     </div>
-    <div style={{height: 400}}>
+    <div style={{height: 500}}>
         <ResponsiveLine
         data={referralPoints.points}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
