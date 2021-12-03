@@ -6,18 +6,22 @@ import {getCollectorData, getPublicFormData} from "../../../../api/form";
 import { ResponsiveLine } from '@nivo/line';
 import { readCollectorReport } from '../../../../api/reports';
 import Navbar from '../../../../components/navbar/navbar';
+import { Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
+import FunctionsIcon from '@mui/icons-material/Functions';
+import TimelineIcon from '@mui/icons-material/Timeline';
 type pageProps = {
 	query: { id: string },
 }
 
 const Index: React.FunctionComponent<pageProps> = ({query}) => {
-	const [submissions, setSubmissions] = useState([]);
+	const [submissions, setSubmissions] = useState({timeLine:[],total:0,average:0});
+
 
     useEffect(() => {
         readCollectorReport(query.id).then( (res) => {
           const color = "hsl(239, 70%, 50%)"
-          let aux = res.data.timeLine;
-          aux[0].color = color;
+          let aux = res.data;
+          aux.data[0].color = color;
           setSubmissions(aux);
         }).catch( (error) => {
           alert(error);
@@ -31,7 +35,7 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
         </header>
         <div style={{height: 400}}>
         <ResponsiveLine
-        data={submissions}
+        data={submissions.timeLine}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
@@ -87,6 +91,69 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
             }
         ]}
     />
+                <Card>
+    <CardContent>
+      <Grid
+        container
+        spacing={3}
+        sx={{ justifyContent: 'space-between' }}
+      >
+        <Grid item>
+          <Typography
+            color="textSecondary"
+            gutterBottom
+            variant="overline"
+          >
+            Total
+          </Typography>
+          <Typography
+            color="textPrimary"
+            variant="h4"
+          >
+            {submissions.total}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Avatar
+            sx={{
+              backgroundColor: 'primary.main',
+              height: 56,
+              width: 56
+            }}
+          >
+            <TimelineIcon/>
+          </Avatar>
+        </Grid>
+                <Grid item>
+          <Typography
+            color="textSecondary"
+            gutterBottom
+            variant="overline"
+          >
+            Media diaria
+          </Typography>
+          <Typography
+            color="textPrimary"
+            variant="h4"
+          >
+            {submissions.average}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Avatar
+            sx={{
+              backgroundColor: 'primary.main',
+              height: 56,
+              width: 56
+            }}
+          >
+            <FunctionsIcon/>
+          </Avatar>
+        </Grid>
+        
+      </Grid>
+    </CardContent>
+  </Card>
     </div>
     </>
     )
