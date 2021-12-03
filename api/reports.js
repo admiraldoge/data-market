@@ -14,3 +14,9 @@ export const readCollectorReport = async (collectorId) => {
   const response = await request.json();
   return response;
 };
+
+export const readFormReport = async (formId) => {
+  const request = await fetch(`${process.env.BACK_END_URL}/reports/forms/${formId}`);
+  const response = await request.json();
+  return response.data;
+};
