@@ -21,7 +21,7 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
         readCollectorReport(query.id).then( (res) => {
           const color = "hsl(239, 70%, 50%)"
           let aux = res.data;
-          aux.data[0].color = color;
+          aux.timeLine[0].color = color;
           setSubmissions(aux);
         }).catch( (error) => {
           alert(error);
@@ -150,7 +150,7 @@ const Index: React.FunctionComponent<pageProps> = ({query}) => {
             <FunctionsIcon/>
           </Avatar>
         </Grid>
-        
+
       </Grid>
     </CardContent>
   </Card>
