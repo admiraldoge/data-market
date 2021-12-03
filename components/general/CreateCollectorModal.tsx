@@ -126,7 +126,7 @@ const CreateCollectorModal: React.FC<createFormModal> = ({data, open, handleOpen
 					variant="outlined"
 					fullWidth
 					style={{marginBottom: "20px"}}
-					value={`http://localhost:3000/c/${collector._id}`}
+					value={`http://143.110.239.224:3000/c/${collector._id}`}
 				/>}
 				{created && <Button variant="contained" color="error" onClick={async () => {
 					handleClose();
