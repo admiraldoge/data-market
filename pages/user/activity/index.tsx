@@ -222,7 +222,7 @@ export default function SignIn() {
     </CardContent>
   </Card>
     </div>
-    <div style={{height: 400}}>
+    <div style={{height: 500}}>
     <ResponsiveLine
         data={points.points}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -344,7 +344,7 @@ export default function SignIn() {
     </CardContent>
   </Card>
     </div>
-    <div style={{height: 400}}>
+    <div style={{height: 500}}>
         <ResponsiveLine
         data={referralPoints.points}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
