@@ -77,7 +77,7 @@ function Index() {
         read: x.permissions[0].value,
         fill: x.permissions[2] === undefined ? false:x.permissions[1].value,
         }
-        return res; 
+        return res;
     })));
 }, []);
 
@@ -120,7 +120,7 @@ function Index() {
         setErrorMessages(["Update failed! Server error"])
         setIserror(true)
         resolve()
-        
+
       })
     }else{
       setErrorMessages(errorList)
@@ -128,7 +128,7 @@ function Index() {
       resolve()
 
     }
-    
+
   }
 
   const handleRowAdd = (newData, resolve) => {
@@ -165,11 +165,11 @@ function Index() {
       resolve()
     }
 
-    
+
   }
 
   const handleRowDelete = (oldData, resolve) => {
-    
+
     del(oldData.id)
       .then(res => {
         const dataDelete = [...data];
@@ -189,20 +189,18 @@ function Index() {
   return (
     <>
     <Navbar />
-    <div className="App">
-      
-      <Grid container spacing={1}>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={6}>
-          <div>
-            {iserror && 
-              <Alert severity="error">
-                  {errorMessages.map((msg, i) => {
-                      return <div key={i}>{msg}</div>
-                  })}
-              </Alert>
-            }       
-          </div>
+    <div className="App" style={{height: '90vh'}}>
+      <div>
+        {iserror &&
+        <Alert severity="error">
+          {errorMessages.map((msg, i) => {
+            return <div key={i}>{msg}</div>
+          })}
+        </Alert>
+        }
+      </div>
+      <Grid container spacing={1} justifyContent={"center"} alignContent={"center"} style={{height: "100%"}}>
+          <Grid item xs={10}>
             <MaterialTable
               title="Users data"
               columns={columns}
@@ -212,7 +210,7 @@ function Index() {
                 onRowUpdate: (newData, oldData) =>
                   new Promise((resolve) => {
                       handleRowUpdate(newData, oldData, resolve);
-                      
+
                   }),
                 onRowAdd: (newData) =>
                   new Promise((resolve) => {
@@ -225,7 +223,6 @@ function Index() {
               }}
             />
           </Grid>
-          <Grid item xs={5}></Grid>
         </Grid>
     </div>
     </>

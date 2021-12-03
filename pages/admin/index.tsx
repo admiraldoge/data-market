@@ -71,8 +71,9 @@ export default function Album() {
     });
     alert("formulario clonado");
   })
-  const report = (() => {
-    router.push('/forms/report');
+  const report = ((id:string) => {
+		console.log('Recigin id: ',id);
+    router.push(`/forms/${id}/report`);
   })
   return (
     <>
@@ -119,7 +120,7 @@ export default function Album() {
               <Grid item key={form} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                > 
+                >
                     <CardHeader
                       action={
                         <>
@@ -128,9 +129,7 @@ export default function Album() {
                         }}>
                           <CopyAll />
                         </IconButton>
-                        <IconButton aria-label="settings" onClick={() => {
-                          report();
-                        }}>
+                        <IconButton aria-label="settings" onClick={() => report(form._id)}>
                           <Assessment />
                         </IconButton>
                         </>
