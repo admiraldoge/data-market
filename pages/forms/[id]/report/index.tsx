@@ -396,6 +396,7 @@ const data2 = [
 		"donutColor": "hsl(116, 70%, 50%)"
 	}
 ]
+// @ts-ignore
 export default function SignIn({query}) {
 	const [barData, setBarData] = useState([]);
 	useEffect(() => {
@@ -514,7 +515,7 @@ export default function SignIn({query}) {
 		</>
 	);
 };
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (context:any) => {
 	let query = context.query;
 	const collectorData = await getCollectorData(query.id);
 	console.log('CollectorData: ',collectorData);
