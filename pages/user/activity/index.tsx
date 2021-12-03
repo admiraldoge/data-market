@@ -12,7 +12,9 @@ import { readUserReport } from '../../../api/reports';
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-import Typography from '@mui/material/Typography';
+import FunctionsIcon from '@mui/icons-material/Functions';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import { Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
 const data = [
     {
       "id": "japan",
@@ -70,22 +72,22 @@ const data = [
     }
 ]
 export default function SignIn() {
-    const [submissions, setSubmissions] = useState([]);
-    const [points, setPoints] = useState([]);
-    const [referralPoints, setReferralPoints] = useState([]);
+    const [submissions, setSubmissions] = useState({data:[],total:"",average:""});
+    const [points, setPoints] = useState({points:[],total:"",average:""});
+    const [referralPoints, setReferralPoints] = useState({points:[],total:"",average:""});
 
     useEffect(() => {
         readUserReport("618df0b0bc31fe1ced04f827").then( (res) => {
           var aux;
           const color = "hsl(239, 70%, 50%)"
-          aux = res.data.submissions.data;
-          aux[0].color = color;
+          aux = res.data.submissions;
+          aux.data[0].color = color;
           setSubmissions(aux);
-          aux = res.data.points.points;
-          aux[0].color = color;
+          aux = res.data.points;
+          aux.points[0].color = color;
           setPoints(aux);
-          aux = res.data.referralPoints.points;
-          aux[0].color = color;
+          aux = res.data.referralPoints;
+          aux.points[0].color = color;
           setReferralPoints(aux);
           console.log(aux)
         }).catch( (error) => {
@@ -100,7 +102,7 @@ export default function SignIn() {
         </header>
         <div style={{height: 400}}>
         <ResponsiveLine
-        data={submissions}
+        data={submissions.data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
@@ -156,10 +158,73 @@ export default function SignIn() {
             }
         ]}
     />
+    <Card>
+    <CardContent>
+      <Grid
+        container
+        spacing={3}
+        sx={{ justifyContent: 'space-between' }}
+      >
+        <Grid item>
+          <Typography
+            color="textSecondary"
+            gutterBottom
+            variant="overline"
+          >
+            Envios totales
+          </Typography>
+          <Typography
+            color="textPrimary"
+            variant="h4"
+          >
+            {submissions.total}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Avatar
+            sx={{
+              backgroundColor: 'primary.main',
+              height: 56,
+              width: 56
+            }}
+          >
+            <TimelineIcon/>
+          </Avatar>
+        </Grid>
+                <Grid item>
+          <Typography
+            color="textSecondary"
+            gutterBottom
+            variant="overline"
+          >
+            Media de envios por dia
+          </Typography>
+          <Typography
+            color="textPrimary"
+            variant="h4"
+          >
+            {submissions.average}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Avatar
+            sx={{
+              backgroundColor: 'primary.main',
+              height: 56,
+              width: 56
+            }}
+          >
+            <FunctionsIcon/>
+          </Avatar>
+        </Grid>
+        
+      </Grid>
+    </CardContent>
+  </Card>
     </div>
     <div style={{height: 400}}>
     <ResponsiveLine
-        data={points}
+        data={points.points}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
@@ -215,10 +280,73 @@ export default function SignIn() {
             }
         ]}
     />
+        <Card>
+    <CardContent>
+      <Grid
+        container
+        spacing={3}
+        sx={{ justifyContent: 'space-between' }}
+      >
+        <Grid item>
+          <Typography
+            color="textSecondary"
+            gutterBottom
+            variant="overline"
+          >
+            Puntos totales
+          </Typography>
+          <Typography
+            color="textPrimary"
+            variant="h4"
+          >
+            {points.total}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Avatar
+            sx={{
+              backgroundColor: 'primary.main',
+              height: 56,
+              width: 56
+            }}
+          >
+            <TimelineIcon/>
+          </Avatar>
+        </Grid>
+                <Grid item>
+          <Typography
+            color="textSecondary"
+            gutterBottom
+            variant="overline"
+          >
+            Media de puntos por dia
+          </Typography>
+          <Typography
+            color="textPrimary"
+            variant="h4"
+          >
+            {points.average}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Avatar
+            sx={{
+              backgroundColor: 'primary.main',
+              height: 56,
+              width: 56
+            }}
+          >
+            <FunctionsIcon/>
+          </Avatar>
+        </Grid>
+        
+      </Grid>
+    </CardContent>
+  </Card>
     </div>
     <div style={{height: 400}}>
         <ResponsiveLine
-        data={referralPoints}
+        data={referralPoints.points}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
@@ -274,7 +402,71 @@ export default function SignIn() {
             }
         ]}
     />
+            <Card>
+    <CardContent>
+      <Grid
+        container
+        spacing={3}
+        sx={{ justifyContent: 'space-between' }}
+      >
+        <Grid item>
+          <Typography
+            color="textSecondary"
+            gutterBottom
+            variant="overline"
+          >
+            Puntos totales
+          </Typography>
+          <Typography
+            color="textPrimary"
+            variant="h4"
+          >
+            {referralPoints.total}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Avatar
+            sx={{
+              backgroundColor: 'primary.main',
+              height: 56,
+              width: 56
+            }}
+          >
+            <TimelineIcon/>
+          </Avatar>
+        </Grid>
+                <Grid item>
+          <Typography
+            color="textSecondary"
+            gutterBottom
+            variant="overline"
+          >
+            Media de puntos por dia
+          </Typography>
+          <Typography
+            color="textPrimary"
+            variant="h4"
+          >
+            {referralPoints.average}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Avatar
+            sx={{
+              backgroundColor: 'primary.main',
+              height: 56,
+              width: 56
+            }}
+          >
+            <FunctionsIcon/>
+          </Avatar>
+        </Grid>
+        
+      </Grid>
+    </CardContent>
+  </Card>
     </div>
+  
     </>
     );
 };
